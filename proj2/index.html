@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2: Fun with Filters and Frequencies</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7fcff;
+        }
+        h1, h2, h3 {
+            color: #343a40;
+        }
+        h1 {
+            text-align: center;
+        }
+        section {
+            margin-bottom: 5px;
+            padding: 20px;
+        }
+        .image-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .image-container h3 {
+            margin: 10px;
+            text-align: left;
+        }
+        img {
+            max-width: 18%;
+            height: auto;
+            margin: 10px 0;
+        }
+        .large-image {
+            max-width: 100%;
+        }
+        .medium-image {
+            max-width: 60%;
+        }
+        .small-image {
+            max-width: 50%;
+        }
+        .mask {
+            width: 300px;
+            height: 300px;
+        }
+        code {
+            color: red;
+            font-weight: medium;
+        }
+    </style>
+</head>
+<body>
+    <h1>Project 2: Fun with Filters and Frequencies</h1>
+
+    <section>
+        <h2>1.1: Finite Difference Operator </h2>
+        <p>Convolve <code>cameraman.png</code> with D<sub>x</sub> and D<sub>y</sub> to get G<sub>x</sub> and G<sub>y</sub>. From there, use the gradient magnitude formula to generate G<sub>m</sub>. Binarized (threshold = 0.25) to create the final photo.</p>
+        <img src="images/1.1/original_image.png" alt="Original Image">
+        <img src="images/1.1/d_x_partial_derivative.png" alt="G_x">
+        <img src="images/1.1/d_y_partial_derivative.png" alt="G_y">
+        <img src="images/1.1/gradient_magnitude.png" alt="G_m (Gradient Magnitude Image)">
+        <img src="images/1.1/edge_image.png" alt="Edge Image, Threshold = 0.25">
+        <p> <em>In order (left to right)</em>: Original Image, G<sub>x</sub>, G<sub>y</sub>, G<sub>m</sub> (Gradient Magnitude Image), Edge Image (Threshold = 0.25) </p>
+    </section>
+
+    <section>
+        <h2>1.2: Derivative of Gaussian Filters</h2>
+        <p> Convolve <code>cameraman.png</code> with a 2D Gaussian filter to blur it. Repeat 1.1 steps. </p>
+        <p> Compared to 1.1, 1.2's edge images are smoother. They also have less noise and thicker edges. Method 1 and Method 2 produce the same results (makes sense given convolution is associative and commutative). </p>
+
+        <h3> Method 1: Apply filters to blurred image </h3>
+        <p><em>In order (left to right)</em>: Blurred Image, G<sub>x,b</sub>, G<sub>y,b</sub>, G<sub>m,b</sub>, Edge Image (Threshold = 0.25)</p>
+        <img src="images/1.2/method1/blurred_image.png" alt="Blurred Image">
+        <img src="images/1.2/method1/gradient_x_blurred.png" alt="G_x,b">
+        <img src="images/1.2/method1/gradient_y_blurred.png" alt="G_y,b">
+        <img src="images/1.2/method1/gradient_magnitude_blurred.png" alt="G_m,b">
+        <img src="images/1.2/method1/edge_image_blurred.png" alt="Edge Image, Threshold = 0.25">
+
+
+        <h3> Method 2: Generate derivatives of Gaussian filters then convolve with blurred image </h3>
+        <p><em>In order</em>: D<sub>x</sub> filter, D<sub>y</sub> filter, G<sub>x,b</sub>, G<sub>y,b</sub>, G<sub>m,b</sub>, Edge Image (Threshold = 0.25)</p>
+        <img src="images/1.2/method2/gaussian_filter_dx.png" alt="D_x filter">
+        <img src="images/1.2/method2/gaussian_filter_dy.png" alt="D_y filter"><br>
+        <img src="images/1.2/method2/convolved_x_blurred.png" alt="G_x,b">
+        <img src="images/1.2/method2/convolved_y_blurred.png" alt="G_y,b">
+        <img src="images/1.2/method2/gradient_magnitude_method_2.png" alt="G_m,b">
+        <img src="images/1.2/method2/edge_image_method_2.png" alt="Edge Image, Threshold = 0.25">
+    </section>
+
+    <section>
+        <h2>2.1: Image “Sharpening”</h2>
+        <p> Use the unsharp masking technique. Blur image with a Gaussian filter, then original image minus blurred image (which has low frequencies) to get the high frequencies. Return original image plus alpha multiplied by the high frequencies.</p>
+        <p> For all images: Gaussian filter with kernel size 20 and sigma value 3. </p>
+        <h3> <code> taj.jpg </code></h3>
+        <p>Alpha values of [1, 2, 4, 6] in order.</p>
+        <img src="images/2.1/taj_original_image.jpg" alt="taj.jpg">
+        <img src="images/2.1/taj_sharpened_alpha_1.jpg" alt="Alpha = 1">
+        <img src="images/2.1/taj_sharpened_alpha_2.jpg" alt="Alpha = 2">
+        <img src="images/2.1/taj_sharpened_alpha_4.jpg" alt="Alpha = 4">
+        <img src="images/2.1/taj_sharpened_alpha_6.jpg" alt="Alpha = 6">
+
+        <h3><code>remy.jpg</code></h3>
+        <p>Alpha values of [1, 2, 4, 6] in order.</p>
+        <img src="images/2.1/remy_original_image.jpg" alt="remy.jpg">
+        <img src="images/2.1/remy_sharpened_alpha_1.jpg" alt="Alpha = 1">
+        <img src="images/2.1/remy_sharpened_alpha_2.jpg" alt="Alpha = 2">
+        <img src="images/2.1/remy_sharpened_alpha_4.jpg" alt="Alpha = 4">
+        <img src="images/2.1/remy_sharpened_alpha_6.jpg" alt="Alpha = 6">
+
+        <h3> Blur then sharpen <code>elephant.jpg</code></h3>
+        <p> <em>In order (left to right)</em>: Original Image, Blurred Image, Sharpened from Blurred Image (Alpha = 2) </p>
+        <p> A lot of the details from the original are lost in the sharpened-from-blurred image. Edges are still pronounced compared to the original. Quality wise, sharpened-from-blurred image is in-between the original and blurred image. </p>
+        <img src="images/2.1/elephant_original_image.jpg" alt="elephant.jpg">
+        <img src="images/2.1/elephant_blurred_image.jpg" alt="elephant blurred">
+        <img src="images/2.1/elephant_sharpened_image.jpg" alt="elephant sharpened">
+    </section>
+
+    <section>
+        <h2>2.2: Hybrid Images</h2>
+        <p> Generate image A's low frequencies by applying a Gaussian filter. Generate image B's high frequencie by subtracting the Gaussian filter applied to image B from the original image. Create hybrid image by adding image A's low frequencies with image B's high frequencies.</p>
+
+        <h3> <code>derek.jpg</code> and <code>nutmeg.jpg</code> </h3>
+        <p> Gaussian filter with kernel size 31 and sigma value 8. <br>
+        Rotated, stretched, and shifted Nutmeg to align with Derek.  <br>
+        <p> <em>In order (left to right)</em>: Derek (low frequency), Nutmeg (high frequency), Hybrid Image </p>
+        <img src="images/2.2/man-cat/man.jpg" alt="Derek">
+        <img src="images/2.2/man-cat/cat.jpg" alt="Nutmeg">
+        <img src="images/2.2/man-cat/man-cat_hybrid_image.jpg" alt="Hybrid">
+
+        <h3> Failure: <code>pikachu.jpg</code> and <code>squirrel.jpg</code> </h3>
+        <p> Gaussian filter with kernel size 31 and sigma value 12. <br>
+        Result was not great, mainly due to Pikachu's bright colors and distinictive strokes. <br>
+        <p> <em>In order (left to right)</em>: Pikachu (low frequency), Squirrel (high frequency), Hybrid Image </p>
+        <img src="images/2.2/pikachu-squirrel/pikachu_low_frequency.jpg" alt="Pikachu">
+        <img src="images/2.2/pikachu-squirrel/squirrel.jpg" alt="Squirrel">
+        <img src="images/2.2/pikachu-squirrel/pikachu-squirrel_hybrid_image.jpg" alt="Hybrid">
+
+        <h3> Favorite: <code>bread.jpg</code> and <code>dog.jpg</code> </h3>
+        <p> Gaussian filter with kernel size 9 and sigma value 7. </p>
+        <p> <em>In order (left to right)</em>: Bread (low frequency), Dog (high frequency), Hybrid Image </p>
+        <img src="images/2.2/bread-dog/bread_low_frequency.jpg" alt="Bread">
+        <img src="images/2.2/bread-dog/dog.jpg" alt="Dog">
+        <img src="images/2.2/bread-dog/bread-dog_hybrid_image.jpg" alt="Hybrid">
+
+        <h3> Frequency Analysis: <code>bread.jpg</code> and <code>dog.jpg</code> </h3>
+        <p> <em>In order (left to right)</em>: Bread Frequency, Bread Frequency (low), Dog Frequency, Dog Frequency (high), Hybrid Frequency </p>
+        <img src="images/2.2/bread-dog/freq_of_bread_original.jpg" alt="Bread Frequency">
+        <img src="images/2.2/bread-dog/freq_of_bread_low_frequency.jpg" alt="Bread Low Frequency">
+        <img src="images/2.2/bread-dog/freq_of_dog_original.jpg" alt="Dog Frequency">
+        <img src="images/2.2/bread-dog/freq_of_dog_high_frequency.jpg" alt="Dog High Frequency">
+        <img src="images/2.2/bread-dog/freq_of_bread-dog_hybrid_image.jpg" alt="Hybrid Frequency">
+    </section>
+
+    <section>
+        <h2>2.3: Gaussian and Laplacian Stacks</h2>
+        <p> Gaussian stacks for the apple and orange images with depth 10, kernel size 5, and sigma value 13. Generate by continuously applying Gaussian filter to the most current layer. <br>
+        Laplacian stacks generated by taking the Gaussian stack layer at index i minus Gaussian stack layer at index i+1. Last layer of the Laplacian stack is the last layer of the Gaussian stack. </p>
+
+        <h3> <code>apple.jpeg</code> Gaussian Stack </h3>
+        <img src="images/2.3/levels/apple_gaussian.png" alt="Apple Gaussian Stack" class="large-image">
+        <h3> <code>orange.jpeg</code> Gaussian Stack </h3>
+        <img src="images/2.3/levels/orange_gaussian.png" alt="Orange Gaussian Stack" class="large-image">
+        <h3> <code>apple.jpeg</code> Laplacian Stack </h3>
+        <img src="images/2.3/levels/apple_laplacian.png" alt="Apple Laplacian Stack" class="large-image">
+        <h3> <code>orange.jpeg</code> Laplacian Stack </h3>
+        <img src="images/2.3/levels/orange_laplacian.png" alt="Orange Laplacian Stack" class="large-image">
+
+        <div class="image-container">
+            <div>
+                <h3>Failure (No Blend): Figure 3.42 Recreation</h3>
+                <img src="images/2.3/no-blend-recreate.jpg" alt="No Blend Recreation" class="medium-image">
+            </div>
+            <div>
+                <h3>Blend: Figure 3.42 Recreation</h3>
+                <img src="images/2.3/recreate.jpg" alt="Blend Recreation" class="medium-image">
+            </div>
+        </div> 
+    </section>
+
+    <section>
+        <h2>2.4: Multiresolution Blending</h2>
+        <p> Same process as 2.3 but also create a Gaussian stack for the mask. Generate blended image with the below pseudocode. </p>
+
+        <pre>
+            for i in len(laplacian_stacks):
+                blended_image += laplacian_stack_imgA[i] * mask_stack[i] + laplacian_stack_imgB[i] * (1 - mask_stack[i])
+        </pre>
+
+        <h3> <code>apple.jpeg</code> and <code>orange.jpeg</code> </h3>
+        <p> Gaussian filter with kernel size 100 and sigma value 13. </p>
+        <p> <em>In order (left to right)</em>: Apple Image, Orange Image, Mask Image, Blended Image (Oraple) </p>
+        <img src="images/2.4/apple-orange/apple.jpeg" alt="Apple">
+        <img src="images/2.4/apple-orange/orange.jpeg" alt="Orange">
+        <img src="images/2.4/apple-orange/mask.jpeg" alt="Mask" class="mask">
+        <img src="images/2.4/apple-orange/oraple.jpg" alt="Blended">
+
+        <h3> <code>lemon.jpg</code> and <code>lime.jpg</code> </h3>
+        <p> Gaussian filter with kernel size 100 and sigma value 13. </p>
+        <p> <em>In order (left to right)</em>: Lemon Image, Lime Image, Mask Image, Blended Image </p>
+        <img src="images/2.4/lemon-lime/lemon.jpeg" alt="Lemon">
+        <img src="images/2.4/lemon-lime/lime.jpeg" alt="Lime">
+        <img src="images/2.4/lemon-lime/mask.jpeg" alt="Mask" class="mask">
+        <img src="images/2.4/lemon-lime/lemon-lime_blend.jpg" alt="Blended">
+
+        <h3> <code>dumbo.jpg</code> and <code>webarebears.jpg</code> </h3>
+        <p> Gaussian filter with kernel size 5 and sigma value 24. </p>
+        <p> <em>In order (left to right)</em>: Dumbo Image, We Bare Bears Image, Mask Image, Blended Image </p>
+        <img src="images/2.4/dumbo-bear/dumbo.jpg" alt="Dumbo">
+        <img src="images/2.4/dumbo-bear/webarebears.jpg" alt="We Bare Bears">
+        <img src="images/2.4/dumbo-bear/mask.jpg" alt="Mask">
+        <img src="images/2.4/dumbo-bear/dumbo-bear_blend.jpg" alt="Blended">
+
+        <h3> Figure 10 Recreation: <code>dumbo.jpg</code> and <code>webarebears.jpg</code> </h3>
+        <img src="images/2.4/dumbo-bear/breakdown.jpg" alt="Figure 10 Recreation" class="small-image">
+    </section>
+
+    <section>
+        <h2>Reflections</h2>
+        <p> Super interesting project! Most important thing I learned is the importance of understanding the intermediate steps (breaking the project into different parts and ramping them up lended itself well to this). I had fun with how creative we could be :D </p>
+        <h3>Bells and Whistles</h3>
+        <p> Used color for both 2.2 and 2.4. In my experience with 2.2, I found that using color images for both low and high frequency images gave the best results. </p>
+
+        <h3> Random failure that was fun! (inverted my mask)</h3>
+        <img src="images/2.4/dumbo-bear/inverted-dumbo-bear_blend.jpg" alt="Inverted Blend">
+    </section>
+</body>
+</html>
