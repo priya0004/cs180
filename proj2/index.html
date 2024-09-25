@@ -61,6 +61,7 @@
 
     <section>
         <h2>1.1: Finite Difference Operator </h2>
+        <p> Use finite difference filters D<sub>x</sub> = [-1 1] and D<sub>y</sub> = [-1 1]<sup>T</sup> to compute G<sub>m</sub> = √(G<sub>x</sub>² + G<sub>y</sub>²), where G<sub>x</sub> is the partial derivative of the original image with respect to x (and  G<sub>y</sub> is with respect to y). </p>
         <p>Convolve <code>cameraman.png</code> with D<sub>x</sub> and D<sub>y</sub> to get G<sub>x</sub> and G<sub>y</sub>. From there, use the gradient magnitude formula to generate G<sub>m</sub>. Binarized (threshold = 0.25) to create the final photo.</p>
         <img src="images/1.1/original_image.png" alt="Original Image">
         <img src="images/1.1/d_x_partial_derivative.png" alt="G_x">
