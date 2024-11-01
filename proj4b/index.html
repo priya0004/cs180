@@ -1,0 +1,688 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>cs180: proj4</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+</style></head><body><article id="13005655-4a37-804e-b680-e473a8689372" class="page sans"><header><h1 class="page-title">cs180: proj4</h1><p class="page-description"></p></header><div class="page-body"><h2 id="13005655-4a37-80f6-b46c-c52279396b19" class=""><strong>[Auto]Stitching Photo Mosaics</strong></h2><h2 id="627a5f33-e2a1-47ae-adbf-d2ea20aa1518" class=""><strong>Project 4A: Image Warping and Mosaicing</strong></h2><h3 id="7ce4bbc9-b8f6-4f97-97f8-291a70063e56" class="">Part 1: <strong>Shoot the Pictures</strong></h3><p id="099e749d-9947-4d7f-9cb2-8aaa3a3b6388" class="">I used my phone and made sure to aim for 40%-70% overlap, only rotating my phone at the camera lens axis. I locked all my settings to ensure the best chance of a clean blend and had no moving items (people, cars, etc) in my photos.</p><p id="13005655-4a37-80a0-88b9-cac250c2e8fe" class=""><em>Note</em>: I took a lot of photos, processed all of them, and then picked the ones with the best results.</p><div id="5d054519-ccb1-400a-aa69-0a1279ad197e" class="column-list"><div id="88f00d5d-fc3d-4fb0-b694-f08e38af4e29" style="width:50%" class="column"><figure id="e0e19bf0-8cdf-46b1-bb83-37008682e74c" class="image"><a href="images/anchor_a_final.jpg"><img style="width:3500px" src="images/anchor_a_final.jpg"/></a></figure><ul id="039f71a9-5d4f-4214-884e-000b9921e4bc" class="bulleted-list"><li style="list-style-type:disc"><code>anchor_a.jpg</code></li></ul></div><div id="86ecd5af-0512-42c6-831d-4db9dec076f7" style="width:50%" class="column"><figure id="3de2ac00-16c9-474d-8567-89b2a193e588" class="image"><a href="images/anchor_b_final.jpg"><img style="width:3500px" src="images/anchor_b_final.jpg"/></a></figure><ul id="1adc56b8-3f28-4dc7-9770-154a5cf8a294" class="bulleted-list"><li style="list-style-type:disc"><code>anchor_b.jpg</code></li></ul></div></div><div id="534f199c-4721-4507-9933-d0fcd71237f0" class="column-list"><div id="4d78d8a7-6ced-48f3-ac4d-7b5c2b1c2706" style="width:50%" class="column"><figure id="e37c76f3-e1c1-4745-9a4b-5ea2e3be3a5d" class="image"><a href="images/vlsb_a_final.jpg"><img style="width:3000px" src="images/vlsb_a_final.jpg"/></a></figure><ul id="7b4fcc46-c817-43c3-96c6-1f066b73d3df" class="bulleted-list"><li style="list-style-type:disc"><code>vlsb_a.jpg</code></li></ul></div><div id="d2560dc7-db3d-4651-9604-e3b3848ae838" style="width:50%" class="column"><figure id="19308ff0-c0ca-460c-a070-08110d47a90f" class="image"><a href="images/vlsb_b_final.jpg"><img style="width:3000px" src="images/vlsb_b_final.jpg"/></a></figure><ul id="b863a5b9-a956-4df2-8610-3dbc77a7517b" class="bulleted-list"><li style="list-style-type:disc"><code>vlsb_b.jpg</code></li></ul></div></div><div id="e16b3695-ebd0-49d4-9a55-4cbc63fb71d5" class="column-list"><div id="0d350461-3e62-41c3-aa75-6524cb576b12" style="width:50%" class="column"><figure id="5dcc4314-7c99-4c77-97a2-5ddf142158e0" class="image"><a href="images/view_a_final.jpg"><img style="width:3500px" src="images/view_a_final.jpg"/></a></figure><ul id="b9fb2017-f24e-4c53-94cf-f00083cfae82" class="bulleted-list"><li style="list-style-type:disc"><code>view_a.jpg</code></li></ul></div><div id="ce0fa38f-6fbf-4d9e-af8f-06844883c770" style="width:50%" class="column"><figure id="3f3f4afe-a77f-4f8f-b6e2-10e597c4f29a" class="image"><a href="images/view_b_final.jpg"><img style="width:2900px" src="images/view_b_final.jpg"/></a></figure><ul id="e04d67bf-a6bc-4bae-ac07-0c82e7ceefc6" class="bulleted-list"><li style="list-style-type:disc"><code>view_b.jpg</code></li></ul></div></div><h3 id="42f7e01e-4e57-46ab-9ec8-23167f8f8f9c" class="">Part 2: <strong>Recover Homographies</strong></h3><p id="a49b57c5-73b7-4ea0-ba64-7af6acf46b05" class="">I based my <code>computeH</code> function on the concepts and derivations from lecture. A homography matrix <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span></span></span></span><span>﻿</span></span> transforms set A of inputted points into set B of inputted points. Below is the system of equations I solved to find <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span></span></span></span><span>﻿</span></span> (using least squares).</p><p id="5cd9c706-e431-4d0e-82fb-fd90ce578f7d" class=""><em>Note</em>: To avoid an underdetermined system, I need at least 4 pairs of known keypoints (as discussed in lecture).</p><figure id="2570ff31-ee89-4f20-87ba-af7b4f48c4d1" class="image"><a href="images/system.png"><img style="width:624px" src="images/system.png"/></a></figure><p id="27f08d6d-35cf-4add-9424-6497294321a1" class="">We can now construct the homography matrix given the definition below!</p><figure id="5fbc7751-0c2f-498c-9216-0fe12ec9ac5d" class="image"><a href="images/def.png"><img style="width:288px" src="images/def.png"/></a></figure><h3 id="242c4871-4305-4d3a-bcfb-4b6372300982" class="">Part 3: <strong>Warp the Images</strong></h3><p id="d54bb2f9-f5b9-461e-93f5-0bb27bd2134a" class="">Having now estimated the homography matrix <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span></span></span></span><span>﻿</span></span>, I took the four corners of <code>img1</code> and applied <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span></span></span></span></span><span>﻿</span></span> to re-project it into <code>img2</code>. Similar to proj3, I used <code>scipy.interpolate.RegularGridInterpolator</code> (it’s quicker than <code>griddata</code>) to compute the interpolated values for <code>img1</code>’s pixels, which will then set the corresponding pixels for the resulting image. I implemented an inverse warp for a smoother re-projection.</p><h3 id="3c4f2f17-9d3a-4e9e-a233-73dbf096b152" class="">Part 4: I<strong>mage Rectification</strong></h3><p id="6a1aabb4-7a23-4c97-bec7-cd7aeb062074" class="">With my functions from parts 2 and 3, I performed “rectification” on two images. To find my correspondence points, I used a <a href="https://cal-cs180.github.io/fa23/hw/proj3/tool.html">previous student’s labeling tool</a> (had also used in proj3: Face Morphing). I also aggressively cropped my images to reduce runtime (most of my raw images were about 2500x4000 px).</p><ul id="d047479c-bbda-4a8a-be97-18f360047a40" class="bulleted-list"><li style="list-style-type:disc">Example 1: <code>soda606.jpg</code></li></ul><div id="07b32a6b-f884-4589-8717-33d1c6ec8015" class="column-list"><div id="f608502f-38f8-4e73-b939-7e395e076651" style="width:37.5%" class="column"><figure id="6d6819f9-eba3-4937-bbc6-239111491558" class="image"><a href="images/soda606-cropped.jpg"><img style="width:240px" src="images/soda606-cropped.jpg"/></a></figure></div><div id="073e3e4a-57fd-44dd-9ff9-8046c31ca89e" style="width:62.5%" class="column"><figure id="cca7e41f-016f-40d1-8899-96090bb705ba" class="image"><a href="images/soda606.jpeg"><img style="width:480px" src="images/soda606.jpeg"/></a></figure><p id="231c0f0f-9f67-4d78-9e0b-8377fb770f58" class="">
+</p></div></div><ul id="1de8d353-b7c9-4634-ac15-685148961998" class="bulleted-list"><li style="list-style-type:disc">Example 2: <code>painting-cropped.jpg</code></li></ul><div id="02c0622f-9ece-4461-8b8a-46eb4c323886" class="column-list"><div id="d6dd0ef0-232f-4aff-ba57-e2bef5d44602" style="width:37.5%" class="column"><figure id="0754cd83-511c-49b4-a26d-deecd5014f7c" class="image"><a href="images/painting-cropped.jpeg"><img style="width:2268px" src="images/painting-cropped.jpeg"/></a></figure></div><div id="3764401a-9db7-4aa7-8742-62aea9ce328a" style="width:62.5%" class="column"><figure id="87adab38-bd8b-48a7-808b-f427ac1835a9" class="image"><a href="images/painting.jpeg"><img style="width:528px" src="images/painting.jpeg"/></a></figure></div></div><h3 id="9c83c678-2910-4294-8283-5a555ee06984" class="">Part 5: <strong>Blend into a Mosaic</strong></h3><p id="f3d0fd8d-8998-45e7-a259-ab2793cd312f" class="">I kept one image as unwarped so that I could stitch it to the warped version of the other image. I padded my unwarped image and blended the overlapping parts of the images with the Laplacian pyramid blending technique. My images were all very large, so I resized them for easier use.</p><p id="13005655-4a37-80e5-a719-f4e355a50264" class="">I had originally tried a simple, linear gradient mask to smooth the overlapping parts, but this still left a visible seam in my resulting photo.</p><p id="13005655-4a37-8051-95af-c09f01b0e8e3" class=""><em>Note</em>: I trimmed the excess black to display the cleanest result.</p><ul id="4f0aefdc-0101-4a07-9b18-612ef080cd86" class="bulleted-list"><li style="list-style-type:disc">Example 1: <code>anchor_mosaic.jpg</code></li></ul><div id="6e4dba5d-4103-4452-9a5f-27dbb8628f12" class="column-list"><div id="27f97c4b-5aef-406f-ae30-f14aea802196" style="width:50%" class="column"><figure id="2e4d5c3d-e285-41f7-abb3-68478cc6aaea" class="image"><a href="images/anchor_a_final.jpg"><img style="width:3500px" src="images/anchor_a_final.jpg"/></a></figure></div><div id="595049e3-2d09-4a82-965d-19837dc2877f" style="width:50%" class="column"><figure id="09dc2fec-2efe-4c9a-a6d0-f225f544d76c" class="image"><a href="images/anchor_b_final.jpg"><img style="width:3500px" src="images/anchor_b_final.jpg"/></a></figure></div></div><figure id="d59a9058-5cb4-46d4-90ea-35b345f0b785" class="image"><a href="images/anchor_mosaic_final.jpeg"><img style="width:600px" src="images/anchor_mosaic_final.jpeg"/></a></figure><p id="11a69e4e-bb23-4338-8830-a84977766846" class="">
+</p><ul id="140eae07-b441-4a50-9280-9e737e4b82e6" class="bulleted-list"><li style="list-style-type:disc">Example 2: <code>vlsb_mosaic.jpg</code></li></ul><div id="9a6c2823-64b6-4190-b948-a431d78b8420" class="column-list"><div id="d200e96b-9f73-4ef6-9d49-bbc452e7a9be" style="width:50%" class="column"><figure id="47997a9a-1a44-4a34-bf5c-1164c633c894" class="image"><a href="images/vlsb_a_final.jpg"><img style="width:3000px" src="images/vlsb_a_final.jpg"/></a></figure></div><div id="70a4b3e0-4cb8-4dec-a3ca-aec82bd53056" style="width:50%" class="column"><figure id="7461a764-2de1-40f9-a241-2507f1efbc34" class="image"><a href="images/vlsb_b_final.jpg"><img style="width:3000px" src="images/vlsb_b_final.jpg"/></a></figure></div></div><figure id="1aadc577-aec1-40b5-a3b8-57d87f260dc9" class="image"><a href="images/vlsb_mosaic_final.jpeg"><img style="width:600px" src="images/vlsb_mosaic_final.jpeg"/></a></figure><p id="19cb38c8-9680-45f1-a83f-1fcac12f2ae3" class="">
+</p><ul id="b5b9dc71-3afe-4ad3-ac60-eb77badd4e44" class="bulleted-list"><li style="list-style-type:disc">Example 3: <code>view_mosaic.jpg</code> </li></ul><div id="053cfbb2-e92d-4ae3-81ce-668544ce132f" class="column-list"><div id="f60458fc-42a0-477a-b6a2-4c24c3b7cc2c" style="width:50%" class="column"><figure id="d0a5044e-0bce-4b6e-883c-d258b6697573" class="image"><a href="images/view_a_final.jpg"><img style="width:2900px" src="images/view_a_final.jpg"/></a></figure></div><div id="1f7622b1-0d9c-4db5-85c7-06dab459f258" style="width:50%" class="column"><figure id="6808e4a0-72e0-4e66-9569-b33eb8722a12" class="image"><a href="images/view_b_final.jpg"><img style="width:2900px" src="images/view_b_final.jpg"/></a></figure></div></div><figure id="34d697d4-506d-438e-bff1-3a76e1379868" class="image"><a href="images/view_mosaic_finalfinal.jpeg"><img style="width:600px" src="images/view_mosaic_finalfinal.jpeg"/></a></figure><h3 id="7c800f07-e378-4a89-838c-86a2b4456b36" class=""><strong>Reflection</strong></h3><p id="38acd508-0cec-4d2f-9a3e-bdb4c211874b" class="">I see how one of the goals of proj4a is to understand just how helpful 4b’s auto-stitching will be. Manually selecting correspondences between both images was frustrating at times as it’s prone to slight errors. I had a lot of fun “rectifying” different images — I’ve seen it in various apps and never knew how it was done!</p><h2 id="13005655-4a37-806e-b4dd-f2d7bcdcf697" class=""><strong>Project 4B: Feature Matching for Autostitching</strong></h2><p id="13005655-4a37-80d1-8d24-c029b9bd2a5c" class="">A huge component of this project involved reading <a href="https://inst.eecs.berkeley.edu/~cs180/fa24/hw/proj4/Papers/MOPS.pdf">Multi-Image Matching using Multi-Scale Oriented Patches by M. Brown, R. Szeliski and S. Winder</a>!</p><h3 id="13005655-4a37-804a-8e5a-ce659ffc7d0f" class="">Part 1: Harris Interest Point Detector</h3><p id="13005655-4a37-8063-95e1-db1df33e452e" class="">With the provided <code><a href="https://inst.eecs.berkeley.edu/~cs180/fa24/hw/proj4/harris.py">harris.py</a></code>, I used <code>get_harris_corners</code> to extract all prominent corners in each image. I discarded any extracted points that are near the image’s border.</p><p id="13005655-4a37-80b0-86e7-c543312e0813" class=""><em>Note</em>: I resized my images for easier use (I scaled each to have a width of 1000px).</p><div id="13005655-4a37-802d-9ae9-e9c76bfe8da2" class="column-list"><div id="13005655-4a37-8056-922d-d4176f688de3" style="width:50%" class="column"><figure id="13005655-4a37-80cd-a311-c6a0d57f2dca" class="image"><a href="images/anchor_a_harris_overlayed.jpg"><img style="width:707.984375px" src="images/anchor_a_harris_overlayed.jpg"/></a></figure></div><div id="13005655-4a37-8092-9b4d-d9b951441d09" style="width:50%" class="column"><figure id="13005655-4a37-8023-b493-c3c776476bce" class="image"><a href="images/anchor_b_harris_overlayed.jpg"><img style="width:707.984375px" src="images/anchor_b_harris_overlayed.jpg"/></a></figure></div></div><div id="13005655-4a37-8058-ba0e-d2a6fc2340ca" class="column-list"><div id="13005655-4a37-805d-ba63-c0557b06c26b" style="width:50%" class="column"><figure id="13005655-4a37-802b-b3c6-c7e43d8c907c" class="image"><a href="images/vlsb_a_harris_overlayed.jpg"><img style="width:1526px" src="images/vlsb_a_harris_overlayed.jpg"/></a></figure></div><div id="13005655-4a37-8035-8a54-c3f434129a19" style="width:50%" class="column"><figure id="13005655-4a37-804c-b71a-cbeae18f70cd" class="image"><a href="images/vlsb_b_harris_overlayed.jpg"><img style="width:707.984375px" src="images/vlsb_b_harris_overlayed.jpg"/></a></figure></div></div><div id="13005655-4a37-8042-81e4-cfc8d2097279" class="column-list"><div id="13005655-4a37-804a-a6ab-f99841d9794b" style="width:50%" class="column"><figure id="13005655-4a37-8081-afa9-cb852f3ef013" class="image"><a href="images/view_a_harris_overlayed.jpg"><img style="width:707.9921875px" src="images/view_a_harris_overlayed.jpg"/></a></figure></div><div id="13005655-4a37-801a-852c-f9bfe0ab7976" style="width:50%" class="column"><figure id="13005655-4a37-8042-ac38-d957f4bc6646" class="image"><a href="images/view_b_harris_overlayed.jpg"><img style="width:707.9921875px" src="images/view_b_harris_overlayed.jpg"/></a></figure></div></div><h3 id="13005655-4a37-8026-abdf-c7986be7e98d" class="">Part 2: <strong>Adaptive Non-Maximal Suppression (ANMS)</strong></h3><p id="13005655-4a37-802b-bcc0-dd844a52ebf6" class="">Now having the Harris points for each image, I filtered some out before applying ANMS to improve control (some images had over 14,000 points!). I implemented the ANMS algorithm, which chooses the top 500 interest points, all of which are fairly evenly spread out. To decide which Harris interest point to keep, I implemented the radii formula below:</p><figure id="13005655-4a37-8020-a70c-fc2a8832bd87" class="image"><a href="images/ANMS.jpeg"><img style="width:576px" src="images/ANMS.jpeg"/></a></figure><p id="13005655-4a37-8091-8ebb-f24bc7a08c27" class="">Here are my ANMS 500 with <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mrow><mi>r</mi><mi>o</mi><mi>b</mi><mi>u</mi><mi>s</mi><mi>t</mi></mrow></msub><mo>=</mo><mn>0.9</mn></mrow><annotation encoding="application/x-tex">c_{robust}=0.9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ro</span><span class="mord mathnormal mtight">b</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.9</span></span></span></span></span><span>﻿</span></span> results for <code>anchor_a.jpg</code> and <code>anchor_b.jpg</code>:</p><div id="13005655-4a37-80aa-a894-e91a6eaa4ce9" class="column-list"><div id="13005655-4a37-8068-a3ea-cb0dbffff433" style="width:50%" class="column"><figure id="13005655-4a37-80f9-9153-e2dc4d1767a8" class="image"><a href="images/anchor_a_anms_overlayed.jpg"><img style="width:707.984375px" src="images/anchor_a_anms_overlayed.jpg"/></a></figure></div><div id="13005655-4a37-80fb-8b25-fcf5f5b48ece" style="width:50%" class="column"><figure id="13005655-4a37-8056-be87-eba9180d2f3b" class="image"><a href="images/anchor_b_anms_overlayed.jpg"><img style="width:1548px" src="images/anchor_b_anms_overlayed.jpg"/></a></figure></div></div><h3 id="13005655-4a37-8026-91bd-e9e244318864" class="">Part 3: <strong>Feature Descriptor Extraction (MOPS)</strong></h3><p id="13005655-4a37-80b9-952d-f814c535b7a9" class="">Now with the ANMS points, I extracted the descriptors for each using Multi-Scale Oriented Patches (MOPS). To describe each small region, I sampled a 40x40 patch centered on an ANMS point. From there, I downsampled (by a factor of 5) and blurred the patch to an 8x8 patch. I used <code>skimage.transform.rescale</code> with <code>anti_aliasing=True</code> to perform the Gaussian blur.</p><p id="13005655-4a37-8084-8827-fa84e851ed38" class="">I then normalize each 8x8 patch by performing bias-gain normalization for each of the 3 color channels to form a vector that describes each feature.</p><p id="13005655-4a37-80c3-9185-d329c95a4544" class="">Here are some example 8x8 patches extracted from <code>anchor_a.jpg</code> (first row) and <code>anchor_b.jpg</code> (second row):</p><div id="13005655-4a37-80f0-9bda-f0c728b6fd69" class="column-list"><div id="13005655-4a37-80d6-9c18-d8cd4b242f3c" style="width:33%" class="column"><figure id="13005655-4a37-8055-8be6-d2220c0bd700" class="image"><a href="images/descriptor_18.jpg"><img style="width:708px" src="images/descriptor_18.jpg"/></a></figure></div><div id="13005655-4a37-807d-8ece-c9dcc810ec99" style="width:33%" class="column"><figure id="13005655-4a37-8064-8c7f-ee43c82e9a70" class="image"><a href="images/descriptor_58.jpg"><img style="width:331px" src="images/descriptor_58.jpg"/></a></figure></div><div id="13005655-4a37-80ca-ae68-db56ddec53bb" style="width:33%" class="column"><figure id="13005655-4a37-8003-a1ba-ea4a9cc976bb" class="image"><a href="images/descriptor_135.jpg"><img style="width:1168px" src="images/descriptor_135.jpg"/></a></figure></div></div><div id="13005655-4a37-8079-b458-c4ea880b5439" class="column-list"><div id="13005655-4a37-801e-a8fe-f2ba198739a9" style="width:33%" class="column"><figure id="13005655-4a37-801e-be51-e3ca8f740579" class="image"><a href="images/descriptor_9.jpg"><img style="width:708px" src="images/descriptor_9.jpg"/></a></figure></div><div id="13005655-4a37-8034-b5bf-f0fa4f662e7e" style="width:33%" class="column"><figure id="13005655-4a37-800c-8b8e-d0b81d7f1071" class="image"><a href="images/descriptor_24.jpg"><img style="width:708px" src="images/descriptor_24.jpg"/></a></figure></div><div id="13005655-4a37-806f-8eee-f771c8813885" style="width:33%" class="column"><figure id="13005655-4a37-80d4-8ede-ee7a92acf884" class="image"><a href="images/descriptor_55.jpg"><img style="width:708px" src="images/descriptor_55.jpg"/></a></figure></div></div><p id="13005655-4a37-8079-b870-f1ea4be0e91a" class="">Here is the side-by-side of a 40x40 patch with an 8x8 feature descriptor for <code>anchor_a.jpg</code>:</p><div id="13005655-4a37-8080-9913-ca485c36f9d2" class="column-list"><div id="13005655-4a37-8067-b2c7-f30e580fae45" style="width:50%" class="column"><figure id="13005655-4a37-8023-9098-e6067820ef81" class="image"><a href="images/40x40_patch.jpg"><img style="width:708px" src="images/40x40_patch.jpg"/></a></figure></div><div id="13005655-4a37-8091-a0cb-ea9db02e39ee" style="width:50%" class="column"><figure id="13005655-4a37-80c2-a4a6-efa21c283e5b" class="image"><a href="images/8x8_path_final.jpeg"><img style="width:707.9921875px" src="images/8x8_path_final.jpeg"/></a></figure></div></div><h3 id="13005655-4a37-80a5-9e64-f415ae91fc88" class="">Part 4: <strong>Feature Matching</strong></h3><p id="13105655-4a37-805f-a3e9-fe51e2284d30" class="">Now having both the feature points and its descriptors, I need to find the correspondence points. For every patch in <code>img1</code>, I found its most similar patch in <code>img2</code> using its L2 distance. To filter out points with no match, I used Lowe’s trick by computing <code>one_nearest_neighbor_dist / two_nearest_neighbor_dist</code> and only keeping values whose Lowe’s ratio is below a threshold value (I used 0.8). The result is an array whose first column contains the feature index in <code>img1</code> and second column contains the matching feature index in <code>img2</code>. Here are the matched corners for the <code>anchor</code> set:</p><figure id="13105655-4a37-80b4-b4d9-d6858c3f5f46" class="image"><a href="images/anchor_match_features.jpg"><img style="width:707.984375px" src="images/anchor_match_features.jpg"/></a></figure><h3 id="13005655-4a37-808a-968f-d207b23f973d" class="">Part 5: Random Sample Consensus (RANSAC)</h3><p id="13005655-4a37-80b2-bcc3-fa0c460eb034" class="">As seen above, there are some outliers. My <code>computeH</code> function from Part A uses least squares, which is highly sensitive to outliers, so I implemented Random Sample Consensus (RANSAC) to remove the incorrect correspondences. For 4-point RANSAC, I chose 4 random and unique pairs of points to compute a homography matrix. From there, I return the homography matrix that resulted in the maximum amount of inliers after 5000 iterations. That resulting homography is what I used in the next part. Here are the finalized correspondence points for the <code>anchor</code> set:</p><figure id="13105655-4a37-800a-85ef-f16c7fb53f0d" class="image"><a href="images/anchor_ransac.jpg"><img style="width:707.984375px" src="images/anchor_ransac.jpg"/></a></figure><h3 id="13005655-4a37-80bb-9c06-d2b0523c18cb" class="">Auto-Stitched Mosaics</h3><p id="13005655-4a37-800b-86c4-fcc1d1eab943" class="">Now that I have the correspondence points, I used Part A’s warping and blending processes to stitch the pairs of images together. Here are the manual (Part A) and automatic (Part B) results side-by-side.</p><p id="13005655-4a37-8041-904e-d7bb3dc860a8" class=""><em>Note</em>: To the human eye, the mosaics formed with manual versus automatic correspondence points are essentially the same!</p><div id="13005655-4a37-80e3-8f7e-fcd9bf2a2190" class="column-list"><div id="13005655-4a37-80c9-9969-fa103e2949d3" style="width:50%" class="column"><figure id="13005655-4a37-8025-84cd-d0b3fe5ec64f" class="image"><a href="images/anchor_mosaic.jpeg"><img style="width:330.9921875px" src="images/anchor_mosaic.jpeg"/></a></figure></div><div id="13005655-4a37-8089-80e9-d32297131b61" style="width:50%" class="column"><figure id="13005655-4a37-80a0-aff6-ec10d6ae2613" class="image"><a href="images/anchor_mosaic_partB.jpeg"><img style="width:330.9921875px" src="images/anchor_mosaic_partB.jpeg"/></a></figure></div></div><div id="13005655-4a37-8086-a11f-ea6fc77b3ac4" class="column-list"><div id="13005655-4a37-802f-ad29-f5fc3c3fd227" style="width:50%" class="column"><figure id="13005655-4a37-80fa-9773-d4f1fc180211" class="image"><a href="images/vlsb_mosaic.jpeg"><img style="width:330.984375px" src="images/vlsb_mosaic.jpeg"/></a></figure></div><div id="13005655-4a37-80ae-b7e5-f26d21035fb6" style="width:50%" class="column"><figure id="13005655-4a37-8022-a409-d5762bd1e5d6" class="image"><a href="images/vlsb_mosaic_partB.jpeg"><img style="width:330.984375px" src="images/vlsb_mosaic_partB.jpeg"/></a></figure></div></div><div id="13005655-4a37-8085-ba16-cbbdb0d29e5c" class="column-list"><div id="13005655-4a37-8090-a3ad-f8e2c08879fd" style="width:50%" class="column"><figure id="13005655-4a37-809e-bbde-c07075cbdaf8" class="image"><a href="images/view_mosaic.jpeg"><img style="width:330.984375px" src="images/view_mosaic.jpeg"/></a></figure></div><div id="13005655-4a37-801a-a0da-ff36b854cf2e" style="width:50%" class="column"><figure id="13005655-4a37-807a-a0fb-d2820d4e102d" class="image"><a href="images/view_mosaic_partB.jpeg"><img style="width:330.984375px" src="images/view_mosaic_partB.jpeg"/></a></figure></div></div><h3 id="13005655-4a37-8085-b25e-f88f469ac3c0" class="">Reflection &amp; Bloopers</h3><p id="13005655-4a37-80c2-b177-e8e8b09c14ac" class="">This was by far my favorite project we’ve done! The research paper was definitely dense, but it leads you to appreciate the derivations and algorithms developed to do what an iPhone camera does so “easily” when creating a panorama. One of the coolest things I learned from this project was Lowe’s trick, which helps our feature matching algorithm find the best point pair matches.</p><p id="13005655-4a37-8014-9856-e9f317493d04" class="">As always, you run into hiccups along the way. Here are some bloopers I saved from Project 4A and 4B:</p><div id="13005655-4a37-80e5-af30-daf84712876c" class="column-list"><div id="13005655-4a37-80a1-ab08-d2aab1a20b63" style="width:37.5%" class="column"><figure id="13005655-4a37-8060-9c2e-ce384ebe4bb4" class="image"><a href="images/anchor_b_harris_overlayed_blooper.jpg"><img style="width:707.984375px" src="images/anchor_b_harris_overlayed_blooper.jpg"/></a></figure></div><div id="13005655-4a37-8009-9982-c158e9405272" style="width:62.5%" class="column"><figure id="13005655-4a37-8097-97cf-cc94088ee3f0" class="image"><a href="images/anchor_matched_features_blooper.jpg"><img style="width:707.9765625px" src="images/anchor_matched_features_blooper.jpg"/></a></figure></div></div><figure id="13005655-4a37-8027-9773-e0396ed27635" class="image"><a href="images/rectification_blooper.jpg"><img style="width:84px" src="images/rectification_blooper.jpg"/></a></figure><p id="13005655-4a37-8004-82f4-f81227860faf" class=""><em>top left image</em>: plotted s=200 sized points by accident</p><p id="13005655-4a37-803a-8c48-e179ebc63258" class=""><em>top right image</em>: hiccups when trying to feature match (also was using a threshold of 0.9)</p><p id="13005655-4a37-8047-b2fa-c52c605b6fbe" class=""><em>bottom middle image</em>: needed to double check my dimensions for rectification</p><p id="13005655-4a37-80fb-8905-f125c1915eea" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
