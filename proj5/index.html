@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>cs180: proj5</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="14205655-4a37-800b-8031-d78a1df20dee" class="page sans"><header><h1 class="page-title">cs180: proj5</h1><p class="page-description"></p></header><div class="page-body"><h2 id="14205655-4a37-80ee-8ed5-c6af9613ce1e" class=""><em>Fun With Diffusion Models</em></h2><h2 id="14205655-4a37-8078-a54b-ff0c67f67161" class=""><strong>Project 5A: The Power of Diffusion Models</strong></h2><p id="14405655-4a37-8012-98cc-de5f17499042" class="">We focus on working with the pre-trained, text-to-image <a href="https://huggingface.co/docs/diffusers/api/pipelines/deepfloyd_if">DeepFloyd IF</a> diffusion model, experimenting with inpainting and creating optical illusions.</p><h2 id="14205655-4a37-8026-b0b1-c7489512211f" class="">Part 0: Setup</h2><p id="14205655-4a37-8017-9807-ed143ad22a5b" class="">With the random seed of 180, I tried out 3 prompts, each with <code>num_inference_steps</code> values of 20 and 100. Overall, I observed how more steps resulted in higher quality outputs. With <code>num_inference_steps = 20</code> outputs, the outputs look glossy and don’t quite capture the texture — the man looks airbrushed and oil painting looks cartoon-ish. With <code>num_inference_steps = 100</code>, the man looks more realistic, the rocket ship has a detailed background, and the snowy village looks more like an actual oil painting.</p><div id="14405655-4a37-803f-975e-fc0f5757caff" class="column-list"><div id="14405655-4a37-80b3-8d2c-f85295f6e97e" style="width:33.333333333333336%" class="column"><figure id="14405655-4a37-80c8-b482-f592cbf6b830" class="image"><a href="images/man_hat_20.png"><img style="width:255.99827575683594px" src="images/man_hat_20.png"/></a><figcaption>a man wearing a hat (20 steps)</figcaption></figure></div><div id="14405655-4a37-807e-b417-f65bcf849143" style="width:33.333333333333336%" class="column"><figure id="14405655-4a37-8010-ae3a-fc8c46a8509c" class="image"><a href="images/rocketship_20.png"><img style="width:255.99827575683594px" src="images/rocketship_20.png"/></a><figcaption>a rocket ship (20 steps)</figcaption></figure></div><div id="14405655-4a37-80ec-a4cf-d0e6bbf2a60e" style="width:33.33333333333333%" class="column"><figure id="14405655-4a37-80b9-bbc0-c268abf6d070" class="image"><a href="images/snowy_village_20.png"><img style="width:255.99827575683594px" src="images/snowy_village_20.png"/></a><figcaption>an oil painting of a snowy mountain village (20 steps)</figcaption></figure></div></div><div id="14405655-4a37-80e7-a8e8-e729deabbdb7" class="column-list"><div id="14405655-4a37-8058-9c27-cd6ae547b025" style="width:33.333333333333336%" class="column"><figure id="14405655-4a37-80dd-a7a5-d10493ecc0ab" class="image"><a href="images/man_hat_100.png"><img style="width:255.99827575683594px" src="images/man_hat_100.png"/></a><figcaption>a man wearing a hat (100 steps)</figcaption></figure></div><div id="14405655-4a37-8075-b341-f0101e5a575f" style="width:33.333333333333336%" class="column"><figure id="14405655-4a37-80bb-a441-f77f23d2d420" class="image"><a href="images/rocketship_100.png"><img style="width:255.99827575683594px" src="images/rocketship_100.png"/></a><figcaption>a rocket ship (100 steps)</figcaption></figure></div><div id="14405655-4a37-80c5-8544-ef0b5c850367" style="width:33.33333333333333%" class="column"><figure id="14405655-4a37-8027-804d-db7090ce23d9" class="image"><a href="images/snowy_village_100.png"><img style="width:255.99827575683594px" src="images/snowy_village_100.png"/></a><figcaption>an oil painting of a snowy mountain village (100 steps)</figcaption></figure></div></div><h2 id="14205655-4a37-8033-a888-fa54ff6a19d3" class="">Part 1: Sampling Loops</h2><h3 id="14205655-4a37-803a-b049-ef4c1c6bdd75" class="">1.1: Implementing the Forward Process</h3><p id="14405655-4a37-80ed-ba8c-e681af823ad4" class="">To take a clean image and add noise to it, I implemented <code>forward(im, t)</code> where the original image as <code>im</code> and timestep as <code>t</code> allow us to add more noise as <code>t</code> increases. This process is equivalent to computing the below equation:</p><figure id="14405655-4a37-8087-9350-cf4840332001" class="image"><a href="images/forward_eqn.png"><img style="width:353.9062805175781px" src="images/forward_eqn.png"/></a></figure><p id="14405655-4a37-80c5-9359-d0563ad70a43" class="">Here are my results with the given campanile test image.</p><figure id="14405655-4a37-80a0-b2d6-d0d5453d0bcd" class="image"><a href="images/campanile_image.png"><img style="width:25%" src="images/campanile_image.png"/></a><figcaption>original</figcaption></figure><div id="14405655-4a37-80a9-b33e-f2e377db5390" class="column-list"><div id="14405655-4a37-80fc-89bd-f1a1fc83969c" style="width:33.333333333333336%" class="column"><figure id="14405655-4a37-8000-9160-c6e588487b92" class="image"><a href="images/campanile_250.png"><img style="width:180px" src="images/campanile_250.png"/></a><figcaption>t = 250</figcaption></figure></div><div id="14405655-4a37-80f5-9a7c-e8f3e85217e8" style="width:33.333333333333336%" class="column"><figure id="14405655-4a37-8010-82c7-f7a5b7e2ad64" class="image"><a href="images/campanile_500.png"><img style="width:180px" src="images/campanile_500.png"/></a><figcaption>t = 500</figcaption></figure></div><div id="14405655-4a37-8089-b45b-e3770316c390" style="width:33.33333333333333%" class="column"><figure id="14405655-4a37-80c7-aa8c-f19b1bb26617" class="image"><a href="images/campanile_750.png"><img style="width:180px" src="images/campanile_750.png"/></a><figcaption>t = 750</figcaption></figure></div></div><h3 id="14205655-4a37-80e0-b1d4-c0ad6218c7d1" class="">1.2: Classical Denoising</h3><p id="14405655-4a37-801d-ba82-ec5d640945a3" class="">With Gaussian blur filtering, by attempting to get rid of the noise, we get rid of the “signal” (the original image). As a result, we can see it is still difficult to recover the original image as the denoised output does not work well. Here are the side-by-side results.</p><p id="14405655-4a37-80fd-8a1a-f0ad0d514b0e" class=""><em>Top row: Part 1.1’s results; Bottom row: Gaussian blur denoising results</em></p><div id="14405655-4a37-8013-be40-d3ddff698620" class="column-list"><div id="14405655-4a37-80cb-940f-df5aa4903c22" style="width:33.333333333333336%" class="column"><figure id="14405655-4a37-80af-9952-f1fa3e8b5e2f" class="image"><a href="images/campanile_250.png"><img style="width:180px" src="images/campanile_250.png"/></a><figcaption>t = 250</figcaption></figure></div><div id="14405655-4a37-8026-a752-d385f6978216" style="width:33.333333333333336%" class="column"><figure id="14405655-4a37-8071-8e65-e0cf8f01194e" class="image"><a href="images/campanile_500.png"><img style="width:180px" src="images/campanile_500.png"/></a><figcaption>t = 500</figcaption></figure></div><div id="14405655-4a37-80b7-822e-ef3a591e6e2a" style="width:33.33333333333333%" class="column"><figure id="14405655-4a37-8027-a015-d5cf72eff623" class="image"><a href="images/campanile_750.png"><img style="width:180px" src="images/campanile_750.png"/></a><figcaption>t = 750</figcaption></figure></div></div><div id="14405655-4a37-804e-b250-ec5bbc29b42c" class="column-list"><div id="14405655-4a37-80ff-adc5-d2193b50e9cc" style="width:33.333333333333336%" class="column"><figure id="14405655-4a37-805a-95bf-e825197f0a08" class="image"><a href="images/campanile_gaussian_250.png"><img style="width:180px" src="images/campanile_gaussian_250.png"/></a><figcaption>t = 250</figcaption></figure></div><div id="14405655-4a37-80d5-8e4b-cc9ac4a2b273" style="width:33.333333333333336%" class="column"><figure id="14405655-4a37-80b4-b10c-dcf35b7c4c1c" class="image"><a href="images/campanile_gaussian_500.png"><img style="width:180px" src="images/campanile_gaussian_500.png"/></a><figcaption>t = 500</figcaption></figure></div><div id="14405655-4a37-8022-8c0a-eabf172f4a49" style="width:33.33333333333333%" class="column"><figure id="14405655-4a37-805a-819e-cbffcdd8db98" class="image"><a href="images/campanile_gaussian_750.png"><img style="width:180px" src="images/campanile_gaussian_750.png"/></a><figcaption>t = 750</figcaption></figure></div></div><h3 id="14205655-4a37-801c-b2be-deb1508b9f5f" class="">1.3: One-Step Denoising</h3><p id="14405655-4a37-803e-9eda-f89729926147" class="">Using a pre-trained UNet, we estimate the image’s Gaussian noise at timestep <code>t</code> and can then remove said noise to (try to) recover the original image. Overall, this process performs better than Part 1.2’s Gaussian blur, but higher <code>t</code> values result in a deviation from the campanile’s actual look. Here are the side-by-side results.</p><p id="14405655-4a37-8084-b7ee-dfde0e16b4c2" class=""><em>Top row: original image; Middle row: Part 1.1’s results; Bottom row: one-step denoising results</em></p><figure id="14405655-4a37-803c-8fba-f409946e4852" class="image"><a href="images/campanile_image.png"><img style="width:180px" src="images/campanile_image.png"/></a><figcaption>original</figcaption></figure><div id="14405655-4a37-802f-8c92-c839e3d69403" class="column-list"><div id="4727d7c4-e083-4d5b-9e35-a1047af41bad" style="width:33.333333333333336%" class="column"><figure id="cadbdecc-0522-432c-97a7-daa8c54065db" class="image"><a href="images/campanile_250.png"><img style="width:180px" src="images/campanile_250.png"/></a><figcaption>t = 250</figcaption></figure></div><div id="5ae74847-3355-40a5-b678-1526a80f682e" style="width:33.333333333333336%" class="column"><figure id="82e0eeaf-cf08-4c62-a976-21d269a49542" class="image"><a href="images/campanile_500.png"><img style="width:180px" src="images/campanile_500.png"/></a><figcaption>t = 500</figcaption></figure></div><div id="4b89cbd4-48fe-4fcb-9734-f5ae18c3ea64" style="width:33.33333333333333%" class="column"><figure id="919314b1-8a3a-42ac-add8-5be9dffbf6f2" class="image"><a href="images/campanile_750.png"><img style="width:180px" src="images/campanile_750.png"/></a><figcaption>t = 750</figcaption></figure></div></div><div id="14405655-4a37-80a4-8cd0-f9690359463a" class="column-list"><div id="14405655-4a37-8068-8e54-cef4587d0ef5" style="width:33.333333333333336%" class="column"><figure id="14405655-4a37-80c8-a9bc-c2be87f3d81c" class="image"><a href="images/campanile_one_step_250.png"><img style="width:180px" src="images/campanile_one_step_250.png"/></a><figcaption>t = 250</figcaption></figure></div><div id="14405655-4a37-80f7-9e40-ede65421be4f" style="width:33.333333333333336%" class="column"><figure id="14405655-4a37-80f5-907d-c5a1c29b9789" class="image"><a href="images/campanile_one_step_500.png"><img style="width:180px" src="images/campanile_one_step_500.png"/></a><figcaption>t = 500</figcaption></figure></div><div id="14405655-4a37-8029-9901-d9be084baff8" style="width:33.33333333333333%" class="column"><figure id="14405655-4a37-806e-a74d-db834c42a0c6" class="image"><a href="images/campanile_one_step_750.png"><img style="width:180px" src="images/campanile_one_step_750.png"/></a><figcaption>t = 750</figcaption></figure></div></div><h3 id="14205655-4a37-8039-838c-c93ee253f95f" class="">1.4: Iterative Denoising</h3><p id="14405655-4a37-80ce-b1ad-e6bf6bbc22c4" class="">To address one-step denoising’s issue with higher <code>t</code> values, we implement iterative denoising. Each stride has a step size of 30, and we start at <code>t = 990</code> and work our way down to <code>t = 0</code>. This process is equivalent to computing the below equation:</p><figure id="14405655-4a37-80bc-aade-fb4c97fb00cc" class="image"><a href="images/iterative_denoising_eqn.png"><img style="width:303.9583435058594px" src="images/iterative_denoising_eqn.png"/></a></figure><p id="14405655-4a37-8046-9106-d74db28ef95c" class="">Here are the results of the process (displaying the process for every 5 loops).</p><div id="14405655-4a37-80cd-8329-e9b13ab3c012" class="column-list"><div id="14405655-4a37-80aa-bc96-e8c85da45d14" style="width:20%" class="column"><figure id="14405655-4a37-8024-8339-ce8dde23347f" class="image"><a href="images/campanile_iterative_690.png"><img style="width:120px" src="images/campanile_iterative_690.png"/></a><figcaption>t = 690</figcaption></figure></div><div id="14405655-4a37-8034-9e2e-ce9a966781ec" style="width:20%" class="column"><figure id="14405655-4a37-8061-a928-e78f7284d989" class="image"><a href="images/campanile_iterative_540.png"><img style="width:120px" src="images/campanile_iterative_540.png"/></a><figcaption>t = 540</figcaption></figure></div><div id="14405655-4a37-802e-9be4-c4e61454e91e" style="width:20%" class="column"><figure id="14405655-4a37-80d0-96b8-fd8363cef6fe" class="image"><a href="images/campanile_iterative_390.png"><img style="width:120px" src="images/campanile_iterative_390.png"/></a><figcaption>t = 390</figcaption></figure></div><div id="14405655-4a37-809f-9cb2-c2efe4577684" style="width:20%" class="column"><figure id="14405655-4a37-8039-8e8e-e6154c3790fa" class="image"><a href="images/campanile_iterative_240.png"><img style="width:120px" src="images/campanile_iterative_240.png"/></a><figcaption>t = 240</figcaption></figure></div><div id="14405655-4a37-8096-89bf-f658b722e536" style="width:20%" class="column"><figure id="14405655-4a37-8057-bddb-ce2728710445" class="image"><a href="images/campanile_iterative_90.png"><img style="width:120px" src="images/campanile_iterative_90.png"/></a><figcaption>t = 90</figcaption></figure></div></div><p id="14405655-4a37-8097-8d69-dc4f19b7a3c2" class="">As a recap, here is the original image with the other methods’ results. As we can see, the best, most-detailed result is the iteratively denoised image.</p><div id="14405655-4a37-8005-8800-ebde15318f5c" class="column-list"><div id="14405655-4a37-80e3-8a04-d75ec9682817" style="width:25%" class="column"><figure id="14405655-4a37-8037-9e90-f3f1cce5cecf" class="image"><a href="images/campanile_image.png"><img style="width:120px" src="images/campanile_image.png"/></a><figcaption>original</figcaption></figure></div><div id="14405655-4a37-8072-b4c5-ff74ceb9e4b8" style="width:25%" class="column"><figure id="14405655-4a37-8070-aab5-e312773316a3" class="image"><a href="images/campanile_gaussian_final.png"><img style="width:120px" src="images/campanile_gaussian_final.png"/></a><figcaption>gaussian</figcaption></figure></div><div id="14405655-4a37-8065-8a5d-d54e2f297198" style="width:25%" class="column"><figure id="14405655-4a37-80a5-9bbe-ed5c4e1fec45" class="image"><a href="images/campanile_one_step_final.png"><img style="width:120px" src="images/campanile_one_step_final.png"/></a><figcaption>one-step</figcaption></figure></div><div id="14405655-4a37-80b3-96b7-c252231c1b03" style="width:25%" class="column"><figure id="14405655-4a37-8018-84e6-c337f586abe8" class="image"><a href="images/campanile_iterative_final.png"><img style="width:120px" src="images/campanile_iterative_final.png"/></a><figcaption>iterative</figcaption></figure></div></div><h3 id="14205655-4a37-8025-8102-edcd220bac8e" class="">1.5: Diffusion Model Sampling</h3><p id="14405655-4a37-807e-98eb-e469164aa50b" class="">With the <code>iterative_denoise</code> function implemented, I can generate images from completely noisy images. Here are some of my results (not the best quality and independent of seed).</p><div id="14405655-4a37-80e1-8588-fcfcbf9e261d" class="column-list"><div id="14405655-4a37-806a-8886-fabc0ee49494" style="width:25%" class="column"><figure id="14405655-4a37-8035-8176-c83005d5e888" class="image"><a href="images/generated_1.png"><img style="width:120px" src="images/generated_1.png"/></a></figure></div><div id="14405655-4a37-8063-b3c3-effefc12966c" style="width:25%" class="column"><figure id="14405655-4a37-80a6-a315-df5f7a7d4476" class="image"><a href="images/generated_2.png"><img style="width:120px" src="images/generated_2.png"/></a></figure></div><div id="14405655-4a37-8017-951f-c7b1e8193ee7" style="width:25%" class="column"><figure id="14405655-4a37-80e7-bf90-fa0ff21742e1" class="image"><a href="images/generated_3.png"><img style="width:120px" src="images/generated_3.png"/></a></figure></div><div id="14405655-4a37-8069-bd80-de85651d361f" style="width:25%" class="column"><figure id="14405655-4a37-8073-afef-f79926aca419" class="image"><a href="images/generated_4.png"><img style="width:120px" src="images/generated_4.png"/></a></figure></div><div id="14405655-4a37-8096-9f3b-d94121301e62" style="width:25%" class="column"><figure id="14405655-4a37-8099-a0ca-fca1fee9929e" class="image"><a href="images/generated_5.png"><img style="width:120px" src="images/generated_5.png"/></a></figure></div></div><h3 id="14205655-4a37-803f-8e3a-ddfb7849f765" class="">1.6: Classifier-Free Guidance (CFG)</h3><p id="14405655-4a37-800f-81d3-ecc2c010c5c3" class="">To improve the results from Part 1.5, we can add both an unconditional and conditional noise estimate. Using the technique from the <a href="https://arxiv.org/abs/2207.12598">Classifier-Free Diffusion Guidance</a> paper, we define our new noise estimate as the equation below, with <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi></mrow><annotation encoding="application/x-tex">\gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span></span></span></span></span><span>﻿</span></span> controlling the CFG’s strength. Here are 5 images with a CFG scale of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo>=</mo><mn>7</mn></mrow><annotation encoding="application/x-tex">\gamma = 7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">7</span></span></span></span></span><span>﻿</span></span>.</p><div id="14405655-4a37-809e-91e8-ca1ab7f95c9a" class="column-list"><div id="14405655-4a37-8040-a657-edbce5f12f05" style="width:20%" class="column"><figure id="14405655-4a37-8055-bb2f-cf2290a473ea" class="image"><a href="images/generated_cfg_1.png"><img style="width:120px" src="images/generated_cfg_1.png"/></a></figure></div><div id="14405655-4a37-8089-b012-e7df0da05e4f" style="width:20%" class="column"><figure id="14405655-4a37-80a9-9ce2-ce89d8bcf499" class="image"><a href="images/generated_cfg_2.png"><img style="width:120px" src="images/generated_cfg_2.png"/></a></figure></div><div id="14405655-4a37-80e2-ac75-ef7386fa08d9" style="width:20%" class="column"><figure id="14405655-4a37-80bd-9506-e77a6d2543a7" class="image"><a href="images/generated_cfg_3.png"><img style="width:120px" src="images/generated_cfg_3.png"/></a></figure></div><div id="14405655-4a37-8098-8c9b-f6813b1d4ae7" style="width:20%" class="column"><figure id="14405655-4a37-80b5-8fe1-d920a5bc5dc7" class="image"><a href="images/generated_cfg_4.png"><img style="width:120px" src="images/generated_cfg_4.png"/></a></figure></div><div id="14405655-4a37-800c-a6b5-d760d8358a92" style="width:20%" class="column"><figure id="14405655-4a37-8007-a451-e1290e783e4e" class="image"><a href="images/generated_cfg_5.png"><img style="width:120px" src="images/generated_cfg_5.png"/></a></figure></div></div><h3 id="14205655-4a37-8025-87fe-d74c06a56b14" class="">1.7: Image-to-Image Translation</h3><p id="14405655-4a37-80d8-ba5c-c93482f5986d" class="">Using <code>iterative_denoise_cfg</code>, we add noise to the original image and then iteratively denoise it to generate new images. For all images, I used noise levels <code>[1, 3, 5, 7, 10, 20]</code> and text prompt &quot;a high quality photo&quot;. Here are the results for the given <code>campanile_image.png</code> and my chosen <code>dog.png</code> and <code>bay_bridge.png</code>.</p><p id="14405655-4a37-80d4-abba-da2c23c01b2a" class=""><em>From left to right: increasing noise level, ending with the original image</em></p><div id="14405655-4a37-8092-b3af-f7a9069b81e7" class="column-list"><div id="14405655-4a37-80b2-b4d7-c32c925982d0" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-804f-b1af-e63b806c9bec" class="image"><a href="images/campanile_1.png"><img style="width:120px" src="images/campanile_1.png"/></a></figure></div><div id="14405655-4a37-806a-9988-d675f60a4eda" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8070-b508-db132b585022" class="image"><a href="images/campanile_3.png"><img style="width:120px" src="images/campanile_3.png"/></a></figure></div><div id="14405655-4a37-80cd-a37b-ed28199d9c59" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80e3-8c29-e3dd9f0992d3" class="image"><a href="images/campanile_5.png"><img style="width:120px" src="images/campanile_5.png"/></a></figure></div><div id="14405655-4a37-8078-ae56-f99812b58177" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8065-923a-d871a6fcd258" class="image"><a href="images/campanile_7.png"><img style="width:120px" src="images/campanile_7.png"/></a></figure></div><div id="14405655-4a37-800e-9370-c754964112c8" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8048-bcf1-e95b5542f03c" class="image"><a href="images/campanile_10.png"><img style="width:120px" src="images/campanile_10.png"/></a></figure></div><div id="14405655-4a37-8053-8983-ffd37606a5dc" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-8040-80ed-f22831bbd0c3" class="image"><a href="images/campanile_20.png"><img style="width:120px" src="images/campanile_20.png"/></a></figure></div><div id="14405655-4a37-80a5-961d-da3463494237" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-8035-b085-de319f889229" class="image"><a href="images/campanile_image.png"><img style="width:120px" src="images/campanile_image.png"/></a></figure></div></div><div id="14405655-4a37-8021-8177-c89e8ea99527" class="column-list"><div id="14405655-4a37-80cc-ad7e-d22aff751c1e" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8039-a673-dfaa5bc0ce5b" class="image"><a href="images/dog_1.png"><img style="width:120px" src="images/dog_1.png"/></a></figure></div><div id="14405655-4a37-8028-8987-ee022398f789" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8040-a30a-dc9da1ab8570" class="image"><a href="images/dog_3.png"><img style="width:120px" src="images/dog_3.png"/></a></figure></div><div id="14405655-4a37-804f-b02d-f8b03f7780c7" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-809e-b51b-f8f08ab285d1" class="image"><a href="images/dog_5.png"><img style="width:120px" src="images/dog_5.png"/></a></figure></div><div id="14405655-4a37-806f-9ffb-dcaa9958a39a" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-809d-ae64-e2e3184c8c22" class="image"><a href="images/dog_7.png"><img style="width:120px" src="images/dog_7.png"/></a></figure></div><div id="14405655-4a37-80ce-b153-f83f2f862530" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8019-88fa-cac1c612aaf2" class="image"><a href="images/dog_10.png"><img style="width:120px" src="images/dog_10.png"/></a></figure></div><div id="14405655-4a37-804f-9851-dd8e148378dc" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-805b-83eb-d1f6ccc48e55" class="image"><a href="images/dog_20.png"><img style="width:120px" src="images/dog_20.png"/></a></figure></div><div id="14405655-4a37-805a-bd71-dacd8801bc2b" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-80f3-9453-e40680de0f51" class="image"><a href="images/dog.png"><img style="width:120px" src="images/dog.png"/></a></figure></div></div><div id="14405655-4a37-80b2-b7c8-ed653008bb80" class="column-list"><div id="14405655-4a37-8079-9aa0-f7a4c9371c63" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8013-a495-fa4f65d7d7e5" class="image"><a href="images/bay_bridge_1.png"><img style="width:120px" src="images/bay_bridge_1.png"/></a></figure></div><div id="14405655-4a37-808f-8829-eefa2076e0e7" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80bd-a21e-fb870176a128" class="image"><a href="images/bay_bridge_3.png"><img style="width:120px" src="images/bay_bridge_3.png"/></a></figure></div><div id="14405655-4a37-806b-843b-e0dd68ae1b38" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8009-8d33-f652f066b908" class="image"><a href="images/bay_bridge_5.png"><img style="width:120px" src="images/bay_bridge_5.png"/></a></figure></div><div id="14405655-4a37-804a-9968-f8cba21145b5" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8030-885b-e8e37cb680b7" class="image"><a href="images/bay_bridge_7.png"><img style="width:120px" src="images/bay_bridge_7.png"/></a></figure></div><div id="14405655-4a37-8079-a152-dd2589ef723f" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-809e-96cd-e5f999fe4e65" class="image"><a href="images/bay_bridge_10.png"><img style="width:120px" src="images/bay_bridge_10.png"/></a></figure></div><div id="14405655-4a37-80dc-abac-e2ad3b7110c6" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-80e4-9d90-d1227127d367" class="image"><a href="images/bay_bridge_20.png"><img style="width:120px" src="images/bay_bridge_20.png"/></a></figure></div><div id="14405655-4a37-8015-854a-e3e9dbdcdce1" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-80f5-a724-f0bfec0ef2dd" class="image"><a href="images/bay_bridge.png"><img style="width:120px" src="images/bay_bridge.png"/></a></figure></div></div><h3 id="14205655-4a37-8080-aa7a-ca8914d09b05" class="">1.7.1: Editing Hand-Drawn and Web Images</h3><p id="14405655-4a37-8024-bad2-fb963422f153" class="">Now, let’s run this same process for hand-drawn and non-realistic images. For all images, I used noise levels <code>[1, 3, 5, 7, 10, 20]</code> and text prompt &quot;a high quality photo&quot;. Here are the results for the internet’s <code>avocado.png</code> and <code>mike.png</code> as well as my hand-drawn <code>house.png</code> and <code>turtle.png</code>.</p><p id="14405655-4a37-8073-8d6c-fda444086a1e" class=""><em>From left to right: increasing noise level, ending with the original image</em></p><div id="14405655-4a37-804d-a2a0-d6a2365f1018" class="column-list"><div id="14405655-4a37-8063-8dfd-d706298593be" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80b2-a636-ce5b4ecd4a96" class="image"><a href="images/avocado_1.png"><img style="width:120px" src="images/avocado_1.png"/></a></figure></div><div id="14405655-4a37-80c0-8ca0-c53e98a4f9a9" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-804c-b527-f2982731d319" class="image"><a href="images/avocado_3.png"><img style="width:120px" src="images/avocado_3.png"/></a></figure></div><div id="14405655-4a37-804d-8d99-ef5bfeb8b7c7" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80d1-9c32-f20f033bc9a3" class="image"><a href="images/avocado_5.png"><img style="width:120px" src="images/avocado_5.png"/></a></figure></div><div id="14405655-4a37-80df-b3e7-ef65fb6aae4b" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80dd-b542-e00e43791cd9" class="image"><a href="images/avocado_7.png"><img style="width:120px" src="images/avocado_7.png"/></a></figure></div><div id="14405655-4a37-8025-b6c5-e584463a5ab5" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8003-9e58-c0ddaa9aab8b" class="image"><a href="images/avocado_10.png"><img style="width:120px" src="images/avocado_10.png"/></a></figure></div><div id="14405655-4a37-80a3-a55a-ef098246ba7e" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-8070-845c-fabcbb16005b" class="image"><a href="images/avocado_20.png"><img style="width:120px" src="images/avocado_20.png"/></a></figure></div><div id="14405655-4a37-80a6-a6e4-e4a0cbce81c9" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-80b9-8db1-f744fdf8ac5d" class="image"><a href="images/avocado.png"><img style="width:120px" src="images/avocado.png"/></a></figure></div></div><div id="14405655-4a37-8015-88b9-d4f0b8753e89" class="column-list"><div id="14405655-4a37-809f-be12-cb23a671086b" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-803d-8464-c854ba9f8824" class="image"><a href="images/mike_1.png"><img style="width:120px" src="images/mike_1.png"/></a></figure></div><div id="14405655-4a37-80d1-8720-decfe751a9d4" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80c5-abe5-e61f50c00c3f" class="image"><a href="images/mike_3.png"><img style="width:120px" src="images/mike_3.png"/></a></figure></div><div id="14405655-4a37-8083-b404-cf49b25444cf" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8060-b7fb-e30a227e7517" class="image"><a href="images/mike_5.png"><img style="width:120px" src="images/mike_5.png"/></a></figure></div><div id="14405655-4a37-80f9-8ba8-ff66fffbbdc0" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8030-bbd8-e08d21ddf6e3" class="image"><a href="images/mike_7.png"><img style="width:120px" src="images/mike_7.png"/></a></figure></div><div id="14405655-4a37-8062-baf9-d5b16200fbb3" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8000-98d9-e8ae5fb177c9" class="image"><a href="images/mike_10.png"><img style="width:120px" src="images/mike_10.png"/></a></figure></div><div id="14405655-4a37-80ea-add0-c7216298e81a" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-80c5-85c2-ff5384836205" class="image"><a href="images/mike_20.png"><img style="width:120px" src="images/mike_20.png"/></a></figure></div><div id="14405655-4a37-80f2-9f8e-c5a2ec0f3889" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-8037-89e3-d6c036ac4bd2" class="image"><a href="images/mike_original.png"><img style="width:120px" src="images/mike_original.png"/></a></figure></div></div><div id="14405655-4a37-809b-885a-da432231ed45" class="column-list"><div id="14405655-4a37-80ff-bb58-ea7904375845" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8007-bd4e-d624bf066e8e" class="image"><a href="images/house_drawing_1.png"><img style="width:120px" src="images/house_drawing_1.png"/></a></figure></div><div id="14405655-4a37-80d3-bc2b-d19cf45f930a" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8034-bfb2-d4aec99379bb" class="image"><a href="images/house_drawing_3.png"><img style="width:120px" src="images/house_drawing_3.png"/></a></figure></div><div id="14405655-4a37-806c-9e51-f6924ddb7c40" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8009-918d-ec8cf4e3e6f0" class="image"><a href="images/house_drawing_5.png"><img style="width:120px" src="images/house_drawing_5.png"/></a></figure></div><div id="14405655-4a37-8008-b001-e7196cd9b898" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8099-93e3-d2c24f3c3d42" class="image"><a href="images/house_drawing_7.png"><img style="width:120px" src="images/house_drawing_7.png"/></a></figure></div><div id="14405655-4a37-80aa-9324-e2022a0ab520" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80be-84da-f909228af284" class="image"><a href="images/house_drawing_10.png"><img style="width:120px" src="images/house_drawing_10.png"/></a></figure></div><div id="14405655-4a37-80be-93f7-f9c3d23095e8" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-802e-b42c-d0ef346d515a" class="image"><a href="images/house_drawing_20.png"><img style="width:120px" src="images/house_drawing_20.png"/></a></figure></div><div id="14405655-4a37-80e8-af43-f3a59d2a0a9b" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-80ba-8d01-d8235702acc7" class="image"><a href="images/house_drawing.png"><img style="width:120px" src="images/house_drawing.png"/></a></figure></div></div><div id="14405655-4a37-805f-a3be-c08b7bd6b1a1" class="column-list"><div id="14405655-4a37-8035-9726-d683c8beab74" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80b5-9f0c-dc9c71bd0f43" class="image"><a href="images/turtle_drawing_1.png"><img style="width:120px" src="images/turtle_drawing_1.png"/></a></figure></div><div id="14405655-4a37-8018-b901-e085b98e5892" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80b9-bde5-ffdc2942c339" class="image"><a href="images/turtle_drawing_3.png"><img style="width:120px" src="images/turtle_drawing_3.png"/></a></figure></div><div id="14405655-4a37-806c-8fe8-e55aa0ce0d30" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8087-a2fa-de5656558927" class="image"><a href="images/turtle_drawing_5.png"><img style="width:120px" src="images/turtle_drawing_5.png"/></a></figure></div><div id="14405655-4a37-804e-ae57-e30a7ad9b389" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8099-a189-c8439e927bd6" class="image"><a href="images/turtle_drawing_7.png"><img style="width:120px" src="images/turtle_drawing_7.png"/></a></figure></div><div id="14405655-4a37-800e-9df4-fe3ec393ba53" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-809e-8dae-cb39d2567a81" class="image"><a href="images/turtle_drawing_10.png"><img style="width:120px" src="images/turtle_drawing_10.png"/></a></figure></div><div id="14405655-4a37-8016-a652-c4303de38ad3" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-8005-9b7b-f162a0079d26" class="image"><a href="images/turtle_drawing_20.png"><img style="width:120px" src="images/turtle_drawing_20.png"/></a></figure></div><div id="14405655-4a37-806d-bcc4-f70a65e64039" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-8037-b09b-e746ba049bb3" class="image"><a href="images/turtle_drawing.png"><img style="width:120px" src="images/turtle_drawing.png"/></a></figure></div></div><h3 id="14205655-4a37-80ac-90f0-edf76318e6c1" class="">1.7.2: Inpainting</h3><p id="14405655-4a37-8012-8790-fc8d942ace57" class="">Using a similar process, we implement the <code>inpaint</code> function to create a new image with the same content where <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">m = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span><span>﻿</span></span> but new content where <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span>. Following the <a href="https://arxiv.org/abs/2201.09865">RePaint</a> paper, we run the diffusion denoising loop and compute the below equation:</p><figure id="14405655-4a37-8092-b1bb-cd2dfee8b8f5" class="image"><a href="images/inpainting_eqn.png"><img style="width:292.99481201171875px" src="images/inpainting_eqn.png"/></a></figure><p id="14405655-4a37-8081-bdef-d93019341c11" class="">Here are the results for the given <code>campanile_image.png</code> and my chosen <code>coffee.png</code> and <code>smiski.png</code>.</p><p id="14405655-4a37-80d2-9687-f8fa1e130804" class=""><em>From left to right: original, mask, to fill, inpainted</em></p><div id="14405655-4a37-80d8-ad14-ceff15978b24" class="column-list"><div id="14405655-4a37-807b-b815-fee8217fa1b4" style="width:25%" class="column"><figure id="14405655-4a37-80a8-b6ed-dbde7f3515ba" class="image"><a href="images/campanile_image.png"><img style="width:120px" src="images/campanile_image.png"/></a></figure></div><div id="14405655-4a37-8031-9d21-fb5a9ba96db6" style="width:25%" class="column"><figure id="14405655-4a37-8028-b8af-f062a26983b2" class="image"><a href="images/campanile_mask.png"><img style="width:120px" src="images/campanile_mask.png"/></a></figure></div><div id="14405655-4a37-8096-a3b4-f2c266a8fca2" style="width:25%" class="column"><figure id="14405655-4a37-8006-8138-ffb36eb1c04b" class="image"><a href="images/campanile_replace.png"><img style="width:120px" src="images/campanile_replace.png"/></a></figure></div><div id="14405655-4a37-808d-8feb-ef9ee86f20f4" style="width:25%" class="column"><figure id="14405655-4a37-80e5-82b4-f40ea7c28afa" class="image"><a href="images/campanile_inpainted.png"><img style="width:120px" src="images/campanile_inpainted.png"/></a></figure></div></div><div id="14405655-4a37-8062-a23b-f48c2a422556" class="column-list"><div id="14405655-4a37-8084-96a1-e0337c0ffa6c" style="width:25%" class="column"><figure id="14405655-4a37-8082-9bb5-e984c566043c" class="image"><a href="images/coffee_image.png"><img style="width:120px" src="images/coffee_image.png"/></a></figure></div><div id="14405655-4a37-80c4-984c-d8249b0d22f4" style="width:25%" class="column"><figure id="14405655-4a37-8085-a5c7-f3a4da275406" class="image"><a href="images/coffee_mask.png"><img style="width:120px" src="images/coffee_mask.png"/></a></figure></div><div id="14405655-4a37-8073-9a41-d9c3bf294dbb" style="width:25%" class="column"><figure id="14405655-4a37-80f5-965b-c03dd9293fcc" class="image"><a href="images/coffee_replace.png"><img style="width:120px" src="images/coffee_replace.png"/></a></figure></div><div id="14405655-4a37-8079-a6fc-f30c2fced511" style="width:25%" class="column"><figure id="14405655-4a37-80d8-8de2-e9bcae38864d" class="image"><a href="images/coffee_inpainted.png"><img style="width:120px" src="images/coffee_inpainted.png"/></a></figure></div></div><div id="14405655-4a37-80a7-b0cc-d005cecfb95f" class="column-list"><div id="14405655-4a37-80d5-b877-cf92fd7ce50a" style="width:25%" class="column"><figure id="14405655-4a37-802e-9ff7-eda22451cecf" class="image"><a href="images/smiski_image.png"><img style="width:120px" src="images/smiski_image.png"/></a></figure></div><div id="14405655-4a37-8078-87a5-c45449ba06a8" style="width:25%" class="column"><figure id="14405655-4a37-804d-a974-d83443ab576c" class="image"><a href="images/smiski_mask.png"><img style="width:120px" src="images/smiski_mask.png"/></a></figure></div><div id="14405655-4a37-8026-8c45-d4c9a5b6551e" style="width:25%" class="column"><figure id="14405655-4a37-80d1-8eb6-f6ba5a409611" class="image"><a href="images/smiski_replace.png"><img style="width:120px" src="images/smiski_replace.png"/></a></figure></div><div id="14405655-4a37-80f0-88b3-e60eafe8341c" style="width:25%" class="column"><figure id="14405655-4a37-8017-93f2-e3c1a5145aa7" class="image"><a href="images/smiski_inpainted.png"><img style="width:120px" src="images/smiski_inpainted.png"/></a></figure></div></div><p id="14405655-4a37-8057-a524-e01fafc8d8d1" class="">The smiski one is funny :)</p><h3 id="14205655-4a37-801f-8c33-cc67da08dd0d" class="">1.7.3: Text-Conditional Image-to-Image Translation</h3><p id="14405655-4a37-806f-ba0a-ca36d1814358" class="">Now, we continue the SDEdit method but guide the projection with a text prompt. Our goal is to create images that gradually look more like the original image while still maintaining similarity to the text prompt. For all images, I used noise levels <code>[1, 3, 5, 7, 10, 20]</code>. Here are the results.</p><p id="14405655-4a37-80cf-8d24-ff7e93cc09f2" class=""><em>From left to right: increasing noise level, ending with the original image</em></p><p id="14405655-4a37-8051-805b-c12dba6f550f" class="">Given: <code>campanile_image.png</code> with &quot;a rocket ship” prompt</p><div id="14405655-4a37-802b-8cc3-c2679e3e2eac" class="column-list"><div id="14405655-4a37-80e3-9e1b-e2be7a5ae39c" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80c8-bcf8-f8f4a56f84f4" class="image"><a href="images/rocket_campanile_1.png"><img style="width:120px" src="images/rocket_campanile_1.png"/></a></figure></div><div id="14405655-4a37-805a-a50e-cea67590bc7e" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-804c-9a95-eb867d42d998" class="image"><a href="images/rocket_campanile_3.png"><img style="width:120px" src="images/rocket_campanile_3.png"/></a></figure></div><div id="14405655-4a37-8036-aa87-c989ac608e73" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8065-a73d-f235c83c690f" class="image"><a href="images/rocket_campanile_5.png"><img style="width:120px" src="images/rocket_campanile_5.png"/></a></figure></div><div id="14405655-4a37-80e0-9109-fe25d3c1a06f" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80fc-a56c-d4f8e8c8d97b" class="image"><a href="images/rocket_campanile_7.png"><img style="width:120px" src="images/rocket_campanile_7.png"/></a></figure></div><div id="14405655-4a37-8028-860d-d8b78ae9b502" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80ad-b7b4-e67449cfbd1c" class="image"><a href="images/rocket_campanile_10.png"><img style="width:120px" src="images/rocket_campanile_10.png"/></a></figure></div><div id="14405655-4a37-8040-aad8-c187e1e85a9e" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-8089-9c73-f84f0987188b" class="image"><a href="images/rocket_campanile_20.png"><img style="width:120px" src="images/rocket_campanile_20.png"/></a></figure></div><div id="14405655-4a37-8062-b920-da2b15b6ff18" style="width:14.285714285714285%" class="column"><figure id="7cf9d1f6-aa52-4d9e-9286-5044ea8b485f" class="image"><a href="images/campanile_image.png"><img style="width:120px" src="images/campanile_image.png"/></a></figure></div></div><p id="14405655-4a37-80fa-b17a-dcbb46949001" class="">Chosen: <code>dog.png</code> with &quot;a photo of a man” prompt</p><div id="14405655-4a37-802f-88ec-c2fdcc581730" class="column-list"><div id="14405655-4a37-8070-9252-efc259e6277f" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80d3-b6ff-e23bec432d74" class="image"><a href="images/man_dog_1.png"><img style="width:120px" src="images/man_dog_1.png"/></a></figure></div><div id="14405655-4a37-807e-8fa0-d29cb1ed2a89" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8074-97e8-f2b7e83f12e5" class="image"><a href="images/man_dog_3.png"><img style="width:120px" src="images/man_dog_3.png"/></a></figure></div><div id="14405655-4a37-802c-ac49-c13c64e6e2a5" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80d8-9181-c1a956a7f852" class="image"><a href="images/man_dog_5.png"><img style="width:120px" src="images/man_dog_5.png"/></a></figure></div><div id="14405655-4a37-80f6-98b5-ecf5dd3319ac" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-806b-9fa6-e33062e5a0fe" class="image"><a href="images/man_dog_7.png"><img style="width:120px" src="images/man_dog_7.png"/></a></figure></div><div id="14405655-4a37-8063-a005-d289ce180377" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-809a-ac50-f3e5518fe960" class="image"><a href="images/man_dog_10.png"><img style="width:120px" src="images/man_dog_10.png"/></a></figure></div><div id="14405655-4a37-8032-997a-c1392ae1e569" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-80b7-a0c8-cc4e2ca7ba6f" class="image"><a href="images/man_dog_20.png"><img style="width:120px" src="images/man_dog_20.png"/></a></figure></div><div id="14405655-4a37-804e-b118-e8137319fa1c" style="width:14.285714285714285%" class="column"><figure id="b980de58-e91c-4a86-9759-f5b9ae041fa9" class="image"><a href="images/dog.png"><img style="width:120px" src="images/dog.png"/></a></figure></div></div><p id="14405655-4a37-8071-8c90-f1314e66bced" class="">Chosen: <code>bay_bridge.png</code> with &quot;a pencil” prompt</p><div id="14405655-4a37-803e-b94e-c0a4080470a5" class="column-list"><div id="14405655-4a37-8060-84a6-f1dd65883f62" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8052-828f-de84479a24e6" class="image"><a href="images/pencil_bridge_1.png"><img style="width:120px" src="images/pencil_bridge_1.png"/></a></figure></div><div id="14405655-4a37-80a7-bf22-fd800e59d559" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80ab-813c-ffdde96aedcc" class="image"><a href="images/pencil_bridge_3.png"><img style="width:120px" src="images/pencil_bridge_3.png"/></a></figure></div><div id="14405655-4a37-8001-97ef-e5e896787048" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-80ae-84f3-c3df2d225875" class="image"><a href="images/pencil_bridge_5.png"><img style="width:120px" src="images/pencil_bridge_5.png"/></a></figure></div><div id="14405655-4a37-8078-81e4-f6e130af731d" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-802d-b93f-c5fd7fdc696c" class="image"><a href="images/pencil_bridge_7.png"><img style="width:120px" src="images/pencil_bridge_7.png"/></a></figure></div><div id="14405655-4a37-80dd-a3a2-c7cba861d2ae" style="width:14.285714285714288%" class="column"><figure id="14405655-4a37-8039-bdf2-e27c743074ac" class="image"><a href="images/pencil_bridge_10.png"><img style="width:120px" src="images/pencil_bridge_10.png"/></a></figure></div><div id="14405655-4a37-805b-b75a-ee19816b852d" style="width:14.285714285714285%" class="column"><figure id="14405655-4a37-8085-9594-fb5c45a669db" class="image"><a href="images/pencil_bridge_20.png"><img style="width:120px" src="images/pencil_bridge_20.png"/></a></figure></div><div id="14405655-4a37-8061-a105-d1407aa3bc2a" style="width:14.285714285714285%" class="column"><figure id="36738cac-facc-4834-98c3-62401dc3491d" class="image"><a href="images/bay_bridge.png"><img style="width:120px" src="images/bay_bridge.png"/></a></figure></div></div><h3 id="14205655-4a37-8094-9898-c9616df8382d" class="">1.8: Visual Anagrams</h3><p id="14405655-4a37-803d-aa81-c8ddc878f89e" class="">Visual anagrams are images which look like two different images when rotated 180 degrees. To generate visual anagrams, I denoised two times — first, for the original image with prompt 1 and second, for the flipped image with prompt 2. At each step, we combine them by averaging the two noise estimates. This process is equivalent to the below algorithm:</p><figure id="14405655-4a37-80de-a1e2-c10b80886597" class="image"><a href="images/visual_anagrams_algo.png"><img style="width:240px" src="images/visual_anagrams_algo.png"/></a></figure><p id="14405655-4a37-8000-8d89-c7c5b60cf313" class="">Given: &quot;an oil painting of people around a campfire” with &quot;an oil painting of an old man” </p><div id="14405655-4a37-80a8-a73b-c00970ce0f2f" class="column-list"><div id="14405655-4a37-8050-a15d-f5c2092acaee" style="width:50%" class="column"><figure id="14405655-4a37-80f8-af6c-d2029764976e" class="image"><a href="images/campfire_man_v1.png"><img style="width:180px" src="images/campfire_man_v1.png"/></a></figure></div><div id="14405655-4a37-804d-925b-d1310fa31512" style="width:50%" class="column"><figure id="14405655-4a37-8065-a32a-e9de7cfa5ca5" class="image"><a href="images/campfire_man_v2.png"><img style="width:180px" src="images/campfire_man_v2.png"/></a></figure></div></div><p id="14405655-4a37-8083-9214-ee56416e016e" class="">Chosen: “an oil painting of a snowy mountain village” with “a photo of the amalfi coast”</p><div id="14405655-4a37-801c-8b1d-c5c52cb4f6d9" class="column-list"><div id="14405655-4a37-80ec-9edc-e80c36b1d1df" style="width:50%" class="column"><figure id="14405655-4a37-801c-bbfd-f1a37ad4da8e" class="image"><a href="images/village_amalfi_v1.png"><img style="width:180px" src="images/village_amalfi_v1.png"/></a></figure></div><div id="14405655-4a37-8056-acea-c74bb156422c" style="width:50%" class="column"><figure id="14405655-4a37-8073-9663-f0bf8b16db71" class="image"><a href="images/village_amalfi_v2.png"><img style="width:180px" src="images/village_amalfi_v2.png"/></a></figure></div></div><p id="14405655-4a37-80cb-a1a0-dc61c22fd9de" class="">Chosen: “a lithograph of waterfalls” with “a lithograph of a skull”</p><div id="14405655-4a37-8055-9e46-d62340644cab" class="column-list"><div id="14405655-4a37-809b-8281-d99eee70b0d7" style="width:50%" class="column"><figure id="14405655-4a37-80d0-8335-f4a4418d07cf" class="image"><a href="images/waterfalls_skulls_v1.png"><img style="width:180px" src="images/waterfalls_skulls_v1.png"/></a></figure></div><div id="14405655-4a37-801d-ae1d-da932734eb81" style="width:50%" class="column"><figure id="14405655-4a37-8037-a4b3-c8737cdbbcc2" class="image"><a href="images/waterfalls_skulls_v2.png"><img style="width:180px" src="images/waterfalls_skulls_v2.png"/></a></figure></div></div><h3 id="14205655-4a37-807a-a565-f174baf62922" class="">1.9: Hybrid Images</h3><p id="14205655-4a37-802d-9977-f15b7a48786f" class="">Hybrid images are images which look like two different images when looking at it up-close versus afar. To generate hybrid images, I denoised the image using 2 prompts. At each step, we combine them by passing one through a high-pass filter and the other through a low-pass filter. To do so, I used a Gaussian blur of <code>kernel_size = 33</code> and <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;"></span></span></span></span></span><span>﻿</span></span><code>σ = 2</code>. Following the <a href="https://arxiv.org/abs/2404.11615">Factorized Diffusion</a> paper, this process is equivalent to the below algorithm:</p><figure id="14405655-4a37-801f-9630-f7c54dff98f5" class="image"><a href="images/hybrid_algo.png"><img style="width:222.97744750976562px" src="images/hybrid_algo.png"/></a></figure><p id="14405655-4a37-80b3-bb05-e3dfca6b19c0" class="">Given: “skull” from far away, ”waterfall” when close up</p><figure id="14405655-4a37-8096-a9fe-ebe142fb2bc0" class="image"><a href="images/waterfall_skull.png"><img style="width:180px" src="images/waterfall_skull.png"/></a></figure><p id="14405655-4a37-805d-b1c2-e75f92cf0084" class="">Chosen: “campfire” from far away, ”amalfi coast” when close up</p><figure id="14405655-4a37-806e-910d-c19828bdb2ea" class="image"><a href="images/amalfi_campfire.png"><img style="width:180px" src="images/amalfi_campfire.png"/></a></figure><p id="14405655-4a37-80a6-a02f-f7eed161c8c2" class="">Chosen: “old man” from far away, ”snowy village” when close up</p><p id="14405655-4a37-8036-b8d5-ccbb8b17d27a" class=""><em>Note: showing two because both are pretty cool!</em></p><div id="14405655-4a37-808f-bf0f-cd1f6074bdb1" class="column-list"><div id="14405655-4a37-8070-b027-cd6cb0cf7703" style="width:50%" class="column"><figure id="14405655-4a37-8097-8536-e3ab2e89bad3" class="image"><a href="images/village_old.png"><img style="width:180px" src="images/village_old.png"/></a></figure></div><div id="14405655-4a37-80af-b3fc-d2ef922b92de" style="width:50%" class="column"><figure id="14405655-4a37-80a7-b216-f462cd93378e" class="image"><a href="images/village_old_v2.png"><img style="width:180px" src="images/village_old_v2.png"/></a></figure></div></div><h2 id="14205655-4a37-80f7-9cc5-e854b7e4e03a" class=""><strong>Project 5B: Diffusion Models from Scratch</strong></h2><p id="14305655-4a37-807c-ba83-f75c23c4c6a0" class="">With all the learning and experimentation with diffusion models in Part A, we trained our own diffusion models on MNIST in Part B.</p><h2 id="14305655-4a37-80a6-b06e-c5b337fedaa4" class="">Part 1: <strong>Training a Single-Step Denoising UNet</strong></h2><h3 id="14305655-4a37-80ac-bd9c-df8b30f4d862" class="">1.1: Implementing the UNet</h3><p id="14405655-4a37-80c0-8097-d4471083ce70" class="">We implemented a one-step denoiser using the <a href="https://arxiv.org/abs/1505.04597">UNet</a> architecture below.</p><figure id="14405655-4a37-8071-bb85-e16beec5144e" class="image"><a href="images/one_step_unet_arch.png"><img style="width:707.9774780273438px" src="images/one_step_unet_arch.png"/></a></figure><h3 id="14305655-4a37-8010-85a7-cab2fa451cd4" class="">1.2: Using the UNet to Train a Denoiser</h3><p id="14405655-4a37-8055-bcfb-fca75bc2e190" class="">To prepare for training the denoiser, we need to generate noisy images. We do so by adding  noise to a clean MNIST image using <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mi>x</mi><mo>+</mo><mi>σ</mi><mo>∗</mo><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">z = x + \sigma * \epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4653em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span></span><span>﻿</span></span>, where <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span></span><span>﻿</span></span> is a clean MNIST digit, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span></span><span>﻿</span></span> is a constant, and <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi><mo>∼</mo><mi>N</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>I</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\epsilon \sim N(0,I)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span>. Our goal is to recover <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span></span><span>﻿</span></span> if given <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span></span><span>﻿</span></span>.</p><figure id="14405655-4a37-80b9-bfbf-deb0bfa74348" class="image"><a href="images/sigmas_noise.png"><img style="width:707.9774780273438px" src="images/sigmas_noise.png"/></a></figure><h3 id="14305655-4a37-80dc-b296-ef66353dc44c" class="">1.2.1: Training</h3><p id="14405655-4a37-8087-bd9a-c91259683945" class="">Now, we can train a denoiser with <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo>=</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">σ = 0.5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.5</span></span></span></span></span><span>﻿</span></span> and hidden dimension <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>=</mo><mn>128</mn></mrow><annotation encoding="application/x-tex">D = 128</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">128</span></span></span></span></span><span>﻿</span></span> on the MNIST dataset. We use an Adam optimizer with a learning rate of 1e-4 and train for 5 epochs. Here is the training process’s loss curve plot.</p><figure id="14405655-4a37-80c0-8730-f9c969309645" class="image"><a href="images/training_loss.png"><img style="width:582.9861450195312px" src="images/training_loss.png"/></a></figure><p id="14405655-4a37-80ce-aabf-dfec3feaae0b" class="">With training completed, here are the denoised results on the test set. It works decently well, with cleaner results from epoch 5 (best seen with the digit 0 and leftmost digit 3 examples).</p><p id="14405655-4a37-80e4-9043-c00a406ee14d" class=""><em>From top to bottom: original, noisy </em><em><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo>=</mo><mn mathvariant="italic">0.5</mn></mrow><annotation encoding="application/x-tex">\mathit{σ = 0.5}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord"><span class="mord mathnormal">σ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathit">0.5</span></span></span></span></span></span><span>﻿</span></span></em><em>, denoised</em></p><div id="14405655-4a37-8076-823f-d01162b08851" class="column-list"><div id="14405655-4a37-8001-9fe2-da26d0c3376f" style="width:50%" class="column"><figure id="14405655-4a37-8012-b859-e3946828ee67" class="image"><a href="images/epoch_1_results_part1.2.1.png"><img style="width:707.9861450195312px" src="images/epoch_1_results_part1.2.1.png"/></a></figure><ul id="14405655-4a37-8035-9cd3-e13646c9c0a6" class="bulleted-list"><li style="list-style-type:disc">1 Epoch of Training</li></ul></div><div id="14405655-4a37-8037-89bc-d2867f5f416f" style="width:50%" class="column"><figure id="14405655-4a37-801a-91bf-d20da2c8d2ec" class="image"><a href="images/epoch_5_results_part1.2.1.png"><img style="width:707.9861450195312px" src="images/epoch_5_results_part1.2.1.png"/></a></figure><ul id="14405655-4a37-802e-83b1-fdbe5e607ef2" class="bulleted-list"><li style="list-style-type:disc">5 Epochs of Training</li></ul></div></div><h3 id="14305655-4a37-80ce-8ad6-ca1f8ff4f697" class="">1.2.2: Out-of-Distribution Testing</h3><p id="14305655-4a37-80d7-8b9b-d52bec5f32a2" class="">We’ve trained our denoiser on noisy <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo>=</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">σ = 0.5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.5</span></span></span></span></span><span>﻿</span></span> digits. Here are the results with more noisy (higher <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">σ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span></span><span>﻿</span></span>) and less noisy (lower <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">σ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span></span><span>﻿</span></span>) test set digits.</p><figure id="14405655-4a37-8036-acd8-d4dfa0d18b45" class="image"><a href="images/out-of-distribution_sigmas.png"><img style="width:707.9861450195312px" src="images/out-of-distribution_sigmas.png"/></a></figure><h2 id="14305655-4a37-807b-8d5a-f9413837052b" class="">Part <strong>2: Training a Diffusion Model</strong></h2><h3 id="14305655-4a37-807c-92f6-f0a6b931cb3c" class="">2.1: Adding Time Conditioning to UNet</h3><p id="14405655-4a37-8003-8c3c-d0fef1d604d4" class="">We now need to implement a <a href="https://arxiv.org/abs/2006.11239">Denoising Diffusion Probabilistic Model</a> (DDPM) to build and train a UNet model that <em>iteratively</em> denoises an image. This UNet follows the architecture below, containing the new operator FCBlock (fully-connected block) to support the conditioning signal.</p><figure id="14405655-4a37-80b9-a4e5-e80a3ae4ba4a" class="image"><a href="images/time_conditioning_unet_arch.png"><img style="width:675.6204379562045px" src="images/time_conditioning_unet_arch.png"/></a></figure><h3 id="14305655-4a37-80cb-ad31-f9c4fd59ec4d" class="">2.2: Training the UNet</h3><p id="14405655-4a37-8003-b8cf-f650eb4359ce" class="">Now, we can train a time-conditioned UNet to predict the noise in <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">x_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> if given noisy image <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">x_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> and timestep <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span></span><span>﻿</span></span>. We do so by selecting a random image, random <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span></span><span>﻿</span></span>, predict the noise, and repeat until the model converges. Here is the training process’s loss curve plot.</p><figure id="14405655-4a37-8048-b95a-d461c3d3eac2" class="image"><a href="images/training_loss_time-conditioned.png"><img style="width:577.9861450195312px" src="images/training_loss_time-conditioned.png"/></a></figure><h3 id="14305655-4a37-80b4-8fed-ebf1a57acadc" class="">2.3: Sampling from the UNet</h3><p id="14405655-4a37-80ef-8da2-c0d4d5b469e2" class="">With training complete, here are the results for the time-conditioned UNet, focusing on 5 and 20 epochs.</p><p id="14405655-4a37-807a-8f56-ccfe73039ef4" class=""><em>NOTE: Epoch 20 is the fully trained model.</em></p><div id="14405655-4a37-80b5-bd33-d0035fae8e87" class="column-list"><div id="14405655-4a37-809f-9af3-d64631c062ed" style="width:50%" class="column"><figure id="14405655-4a37-80ad-9eaf-d41726eab4e8" class="image"><a href="images/epoch_5_time_results.png"><img style="width:707.984375px" src="images/epoch_5_time_results.png"/></a></figure><ul id="14405655-4a37-8058-9eed-c15a7c0e63df" class="bulleted-list"><li style="list-style-type:disc">5 Epochs of Training</li></ul></div><div id="14405655-4a37-80d3-b8e7-d73e10b85d53" style="width:50%" class="column"><figure id="14405655-4a37-8012-b238-f297a820d90e" class="image"><a href="images/epoch_20_time_results.png"><img style="width:707.984375px" src="images/epoch_20_time_results.png"/></a></figure><ul id="14405655-4a37-807c-a246-dfd32e3b9c35" class="bulleted-list"><li style="list-style-type:disc">20 Epochs of Training</li></ul></div></div><h3 id="14305655-4a37-802c-9e54-d6a324abf5e9" class="">2.4: Adding Class-Conditioning to UNet</h3><p id="14405655-4a37-809d-82d5-e2bda61c38ce" class="">We improve the time-conditioned UNet implementation by optionally conditioning it on the digit 0-9 class by adding 2 more FCBlocks and using one-hot vector c (not using a single scalar). With this model, we can choose the digit we want to generate. Here is the training process’s loss curve plot.</p><figure id="14405655-4a37-809c-91a4-ffb3717d49e1" class="image"><a href="images/training_loss_class-conditioned.png"><img style="width:577.9861450195312px" src="images/training_loss_class-conditioned.png"/></a></figure><h3 id="14305655-4a37-8062-aa3d-dea7aed3b559" class="">2.5 Sampling from the Class-Conditioned UNet</h3><p id="14405655-4a37-80f4-8306-ee182d3a19b7" class="">With training complete, here are the results for the class-conditioned UNet, focusing on 5 and 20 epochs.</p><p id="14405655-4a37-802f-9719-ea88af119ca4" class=""><em>NOTE: Epoch 20 is the fully trained model.</em></p><div id="14405655-4a37-8036-8e64-ce19da7b42f4" class="column-list"><div id="14405655-4a37-8028-96e4-e191599056fb" style="width:50%" class="column"><figure id="14405655-4a37-806d-8204-de785fe24e57" class="image"><a href="images/epoch_5_class_results.png"><img style="width:707.984375px" src="images/epoch_5_class_results.png"/></a></figure><ul id="14405655-4a37-801d-9bc8-dedf866dee5b" class="bulleted-list"><li style="list-style-type:disc">5 Epochs of Training</li></ul></div><div id="14405655-4a37-80b6-a32e-e5150707961a" style="width:50%" class="column"><figure id="14405655-4a37-8050-991f-f02fc75c2fe1" class="image"><a href="images/epoch_20_class_results.png"><img style="width:707.984375px" src="images/epoch_20_class_results.png"/></a></figure><ul id="14405655-4a37-806b-b0d2-ef5498bbbab7" class="bulleted-list"><li style="list-style-type:disc">20 Epochs of Training</li></ul></div></div><h3 id="14405655-4a37-80f6-b9be-d29a3df2158e" class="">Bells and Whistles: Sampling GIFs</h3><p id="14305655-4a37-8055-9666-fc3af7429a44" class="">GIF 1: time-conditioned model after 20 epochs of training</p><figure id="14505655-4a37-80e3-95a7-f361e1dad6c1" class="image"><a href="images/2.3_epoch_20.gif"><img style="width:288px" src="images/2.3_epoch_20.gif"/></a></figure><p id="14405655-4a37-8052-ad02-f092ad61a02c" class="">GIF 2: time-conditioned and class-conditioned model after 20 epochs of training</p><figure id="14505655-4a37-804c-bb5e-ceec44bd5547" class="image"><a href="images/2.5_epoch_20.gif"><img style="width:480px" src="images/2.5_epoch_20.gif"/></a></figure><h2 id="14305655-4a37-80aa-92d4-e35380eb73a3" class="">Reflection <strong>&amp; Bloopers</strong></h2><p id="14505655-4a37-80cc-913a-ed6f4d371398" class="">Definitely a challenging project but had fun reading new papers and experimenting! Splitting up the project and ramping up from working with pre-trained models to training our own in Part B made the project more approachable.</p><p id="14505655-4a37-8090-9e02-cdceb5b19b8d" class="">Only saved one blooper :’( so here it is!</p><figure id="14505655-4a37-80ec-9ac6-cd6c7a5c04ef" class="image"><a href="images/training_loss_blooper.png"><img style="width:432px" src="images/training_loss_blooper.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
