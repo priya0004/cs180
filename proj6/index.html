@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>cs180: final proj</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="15b05655-4a37-80bc-9f0b-c199047205a9" class="page sans"><header><h1 class="page-title">cs180: final proj</h1><p class="page-description"></p></header><div class="page-body"><h2 id="15b05655-4a37-80c4-8252-d6fb1f4649b8" class=""><em><strong>Neural Radiance Fields</strong></em></h2><h2 id="15b05655-4a37-8027-b9d0-e8ad5974e1e2" class=""><strong>Part 1: Fit a Neural Field to a 2D Image</strong></h2><p id="15b05655-4a37-80df-89fb-d32fa601d141" class="">We use Part 1 as a stepping stone to Part 2. Our goal in Part 1 is to create a neural field that can represent a 2D image. To do so, the neural field (a Multilayer Perceptron (MLP) network with Sinusoidal Positional Encoding (PE))<em> </em>takes in 2D pixel coordinates and outputs the 3D pixel colors for each coordinate. To train the model, I modified the hyperparameters of the neural network: changed hidden layer size to 1024 and highest frequency level of sinusoidal positional encoding to 20. I trained the model for 3000 iterations, using a learning rate of 0.001.</p><figure id="15b05655-4a37-8060-ab2d-c3f78282bcc3" class="image"><a href="images/mlp_img.jpg"><img style="width:528px" src="images/mlp_img.jpg"/></a></figure><p id="15b05655-4a37-8005-bc03-d25fd9fe1599" class="">For each image, I’ve included the training PSNR across iterations plot and the training process visualization. I included other experimentations like how increasing the model size improved results but increasing the highest frequency level didn’t impact results much.</p><p id="15b05655-4a37-8002-9cdc-e68667d7d521" class=""><em>From top to bottom</em>: [Hidden Layer Size = 128, L = 10], [Hidden Layer Size = 1024, L = 10], [Hidden Layer Size = 128, L = 20]</p><p id="15b05655-4a37-802b-b23d-c14b8c818e3c" class=""><br/><code>fox.jpg</code></p><div id="15b05655-4a37-806a-a23a-eda1773cce2a" class="column-list"><div id="15b05655-4a37-807a-93c3-fc72b80ec452" style="width:50%" class="column"><figure id="15b05655-4a37-8083-ab30-e96c94f7a4cc" class="image"><a href="images/fox.jpg"><img style="width:707.9921875px" src="images/fox.jpg"/></a></figure></div><div id="15b05655-4a37-8030-96ad-ff599ab98322" style="width:50%" class="column"><figure id="15b05655-4a37-80af-b0e0-ce75d828a61f" class="image"><a href="images/psnr_fox.png"><img style="width:707.9921875px" src="images/psnr_fox.png"/></a></figure></div></div><figure id="15b05655-4a37-8049-91cd-c22952a850a8" class="image"><a href="images/default_fox.png"><img style="width:2288px" src="images/default_fox.png"/></a></figure><figure id="15b05655-4a37-80b3-b86d-ca1f02645ea8" class="image"><a href="images/hidden_fox.png"><img style="width:2288px" src="images/hidden_fox.png"/></a></figure><figure id="15b05655-4a37-80a8-866c-f0e80bb27c0d" class="image"><a href="images/freq_fox.png"><img style="width:2288px" src="images/freq_fox.png"/></a></figure><p id="15b05655-4a37-8032-9078-dbfaeb31ee30" class="">
+</p><p id="15b05655-4a37-80ad-8a39-d4c6fb03cf4c" class=""><code>dog.jpg</code></p><div id="15b05655-4a37-80b1-9796-c4c269de5e8f" class="column-list"><div id="15b05655-4a37-80e5-b965-d9c6b8034d5f" style="width:50%" class="column"><figure id="15b05655-4a37-8064-9743-fc58dc052bf6" class="image"><a href="images/yorkie.jpg"><img style="width:707.9921875px" src="images/yorkie.jpg"/></a></figure></div><div id="15b05655-4a37-80b5-be49-d1c2836c2ee0" style="width:56.25%" class="column"><figure id="15b05655-4a37-80b5-8626-e552b379b034" class="image"><a href="images/psnr_dog.png"><img style="width:707.9921875px" src="images/psnr_dog.png"/></a></figure></div></div><figure id="15b05655-4a37-8063-89c6-eb81221435a1" class="image"><a href="images/default_dog.png"><img style="width:2282px" src="images/default_dog.png"/></a></figure><figure id="15b05655-4a37-8046-8a15-c02ae8e352dd" class="image"><a href="images/hidden_dog.png"><img style="width:2288px" src="images/hidden_dog.png"/></a></figure><figure id="15b05655-4a37-80fb-ad88-ebbb5a6d9ce2" class="image"><a href="images/freq_dog.png"><img style="width:2288px" src="images/freq_dog.png"/></a></figure><h2 id="15b05655-4a37-806a-b9c2-c7d26d92e922" class=""><strong>Part 2: Fit a Neural Radiance Field from Multi-View Images</strong></h2><p id="15b05655-4a37-8078-a76a-ddafbb28f177" class="">Building from Part 1, we can now use a neural <em>radiance</em> field to represent a 3D space by inverse rendering multi-view calibrated images. Much of this part refers to the techniques from the <a href="https://www.matthewtancik.com/nerf">NeRF</a> paper.</p><h3 id="15b05655-4a37-8039-be7a-f06727edc792" class="">Part 2.1: Create Rays from Cameras</h3><p id="15b05655-4a37-80af-af5a-f04bc3bb5b2e" class="">I implemented three functions in this part, all supporting batched coordinates for future use.</p><p id="15b05655-4a37-8083-9ffe-ffa1fa74c123" class="">The first function (Camera to World Coordinate Conversion) transforms a point from camera space to world space by appending a fourth dimension of ones to the world coordinates and multiplying it by the camera-to-world transformation matrix like the following:</p><figure id="15b05655-4a37-80aa-b257-d4f2eeea5905" class="image"><a href="images/camera-to-world.png"><img style="width:240px" src="images/camera-to-world.png"/></a></figure><p id="15b05655-4a37-8042-9db2-e5296a8cfdc4" class="">The second function (Pixel to Camera Coordinate Conversion) converts 2D pixel coordinates to 3D points in the camera space by constructing the intrinsic matrix <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span></span></span></span></span><span>﻿</span></span> with focal lengths (<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">f_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>,<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">f_y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>) and principal point (<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>o</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">o_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">o</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>,<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>o</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">o_y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">o</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>) and calculating the following:</p><figure id="15b05655-4a37-8086-93f4-d166e8734b2b" class="image"><a href="images/pixel-to-camera.png"><img style="width:192px" src="images/pixel-to-camera.png"/></a></figure><p id="15b05655-4a37-806a-90ae-daa53c9c95d4" class="">The third function (Pixel to Ray) generates the ray origin and ray direction for 2D pixel coordinates by calculating the world-to-camera matrix <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mn>2</mn><mi>c</mi></mrow><annotation encoding="application/x-tex">w2c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mord">2</span><span class="mord mathnormal">c</span></span></span></span></span><span>﻿</span></span> and taking its inverse <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mn>2</mn><mi>w</mi></mrow><annotation encoding="application/x-tex">c2w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">c</span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span></span></span></span></span><span>﻿</span></span> to use <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mn>2</mn><mi>w</mi></mrow><annotation encoding="application/x-tex">c2w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord mathnormal">c</span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span></span></span></span></span><span>﻿</span></span>’s upper left 3x3 corner to calculate the following:</p><figure id="15b05655-4a37-8038-b443-eae414096002" class="image"><a href="images/pixel-to-ray-1.png"><img style="width:192px" src="images/pixel-to-ray-1.png"/></a></figure><figure id="15b05655-4a37-80fb-9b9a-d01d23c8631f" class="image"><a href="images/pixel-to-ray-2.png"><img style="width:240px" src="images/pixel-to-ray-2.png"/></a></figure><h3 id="15b05655-4a37-80b0-9fa1-f740624c7d4b" class=""><strong>Part 2.2: Sampling</strong></h3><p id="15b05655-4a37-800f-9f37-c7fbc6f04dd3" class="">I implemented two functions in this part and saved performance time by vectorizing my second function.</p><p id="15b05655-4a37-80f2-ad85-fb58a3ad109f" class="">The first function (Sampling Rays from Images) is a part of Part 2.3’s dataloader class and converts the pixel coordinates into ray origins and directions. I sample pixels globally from all images, account for the offset from image coordinate to pixel center by adding 0.5, and convert them to rays using Part 2.1’s Pixel to Ray function.</p><p id="15b05655-4a37-80f1-91cc-ebd6d44ee78f" class="">The second function (Sampling Points along Rays) discretize each ray into samples in the 3D space. I added the ray direction multiplied by different distances to the ray origins, ensuring that when <code>perturbation=True</code>, I perturb the boundaries to ensure training touches every location along the ray.</p><h3 id="15b05655-4a37-80df-b6ce-eaf81f03b595" class="">Part 2.3: Putting the Dataloading All Together</h3><p id="15b05655-4a37-80c5-a3f3-f474d5b0ad61" class="">With my modified dataloader and using <code>viser</code>, here are some of my verification results (right image is sampling 100 rays, left image is sampling 100 rays across one image):</p><div id="15c05655-4a37-80c9-ad67-da02483780f9" class="column-list"><div id="15c05655-4a37-8053-94ee-d711daca16a7" style="width:50%" class="column"><figure id="15c05655-4a37-8048-9901-f6e145bccf74" class="image"><a href="images/ray-visual-1.png"><img style="width:707.9921875px" src="images/ray-visual-1.png"/></a></figure></div><div id="15c05655-4a37-808f-9758-f69e075a2072" style="width:50%" class="column"><figure id="15c05655-4a37-800b-bfc1-d4d0946f4cd2" class="image"><a href="images/ray-visual-2.png"><img style="width:707.9921875px" src="images/ray-visual-2.png"/></a></figure></div></div><h3 id="15b05655-4a37-80a7-aa52-d5f377613dfb" class="">Part 2.4: Neural Radiance Field</h3><p id="15b05655-4a37-8019-b1e3-c89eeb15bf51" class="">I built the neural radiance field (NeRF) using the network structure below, with the goal of outputting the densities and pixel values when given 3D coordinates (points sampled along ray) and ray directions. The main additions to this structure from Part 1’s are the intermediate injections of the input and splitting the model to output both the density and RGB values.</p><figure id="15b05655-4a37-8015-81dc-c028d31b62ae" class="image"><a href="images/mlp_nerf.png"><img style="width:707.984375px" src="images/mlp_nerf.png"/></a></figure><h3 id="15b05655-4a37-80d9-b54d-f4fb2e105a2f" class="">Part 2.5: Volume Rendering</h3><p id="15b05655-4a37-802c-bce5-d3e4df608f84" class="">I implemented the volume rendering function <code>volrend</code> where given the NeRF’s density and RGB values, it computes the loss by comparing the given with the original pixel values. I used <code>torch.cumsum</code> and padded densities with 0 in the front due to the <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7429em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span> summation term.</p><p id="15b05655-4a37-80fe-a36e-ecc8f68344a9" class="">I trained my model with the following hyperparameters: adam learning rate of 1e-3, 3600 gradient descent steps and sampling 1024 rays each time with 64 samples along each. Here are some intermediate training images as well as the validation set’s MSE and PSNR. As seen, I was able to achieve above 23 PSNR!</p><figure id="15c05655-4a37-80f3-8d25-c2b3d24039e9" class="image"><a href="images/iteration-visualize.png"><img style="width:2288px" src="images/iteration-visualize.png"/></a></figure><div id="15c05655-4a37-80ba-ac11-ec8d8577058f" class="column-list"><div id="15c05655-4a37-8078-8260-c9ad41caca67" style="width:50%" class="column"><figure id="15c05655-4a37-80dd-bb70-edb4403cac2c" class="image"><a href="images/mse.png"><img style="width:707px" src="images/mse.png"/></a></figure></div><div id="15c05655-4a37-801d-ba77-e557fd47e76c" style="width:50%" class="column"><figure id="15c05655-4a37-8005-b243-d343c7a84e96" class="image"><a href="images/psnr.png"><img style="width:707px" src="images/psnr.png"/></a></figure></div></div><figure id="15c05655-4a37-8018-aff2-cb3bfb453b16" class="image"><a href="images/full.gif"><img style="width:200px" src="images/full.gif"/></a></figure><h2 id="15b05655-4a37-80d1-b781-d8b557d65588" class="">Bells <strong>and Whistles: Background Color</strong></h2><p id="15b05655-4a37-80bc-8e71-f7cc100c597c" class="">To render the video with a background color other than black, I modified my <code>volrend</code> function to multiply <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">T_{n+1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8917em;vertical-align:-0.2083em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> by the background color passed into the function (in my case, red) and add it to the pixel color.</p><figure id="15c05655-4a37-80fe-9e77-e1de00ba996b" class="image"><a href="images/full-red.gif"><img style="width:200px" src="images/full-red.gif"/></a></figure><h2 id="15b05655-4a37-805d-ad77-df46fe3806b2" class=""><strong>Reflection</strong></h2><p id="15b05655-4a37-8090-995e-e36d7a318e96" class="">This project definitely was time-consuming and interesting. I learned a lot and the end results were great but there’s room to improve! I wasn’t able to vectorize everything I wanted, resulting in training taking much longer than expected.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
